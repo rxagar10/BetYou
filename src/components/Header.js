@@ -32,7 +32,7 @@ function Header(props) {
           <button onClick={() => toggleDrawer()}>Menu</button>
           <Drawer className="menu-drawer" open={drawerOpen}
                   onClose={() => toggleDrawer()}>
-            <Menu/>
+            <Menu />
           </Drawer>
           <h1>BetYou</h1>
           {
@@ -43,9 +43,9 @@ function Header(props) {
                   <Link to="/login">Log In</Link>
                 </div>
                 :
-                <span onClick={() => logOut()}>
+                <a onClick={() => logOut()}>
                   {username}
-                </span>
+                </a>
           }
         </div>
 
@@ -61,7 +61,7 @@ function Header(props) {
               <Login />
             </Route>
             <Route exact path="/myAccount">
-              <MyAccount />
+              <MyAccount username={username} />
             </Route>
           </Switch>
         </div>
