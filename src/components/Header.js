@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import "../styles/header.css";
 import Drawer from '@material-ui/core/Drawer';
 import Menu from "./Menu";
 import {
   BrowserRouter as Router,
-  Switch, Link, Route }
+  Switch, Link, Route
+}
   from "react-router-dom";
 import SignUp from "./SignUp";
 
@@ -17,24 +18,29 @@ function Header(props) {
   }
 
   return (
-      <div className="header">
-        <button onClick={() => toggleDrawer()}>Menu</button>
-        <Drawer open={drawerOpen} onClose={() => toggleDrawer()}>
-          <Menu />
-        </Drawer>
-        <h1>BetYou</h1>
-
-        <Router>
+      <Router>
+        <div className="header">
+          <button onClick={() => toggleDrawer()}>Menu</button>
+          <Drawer className="menu-drawer" open={drawerOpen} onClose={() => toggleDrawer()}>
+            <Menu/>
+          </Drawer>
+          <h1>BetYou</h1>
           <Link to="/sign-up">Sign Up</Link>
           <Link>Log In</Link>
+        </div>
 
+        <div className="main-page">
           <Switch>
-            <Route path="/sign-up">
+            <Route exact path="/">
+              <div>Home page</div>
+            </Route>
+            <Route exacct path="/sign-up">
               <SignUp />
             </Route>
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </Router>
+
   )
 }
 

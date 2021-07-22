@@ -6,11 +6,25 @@
 
 li {
   padding: 0 4vw 0 0;
-  margin: 2vh 0 2vh 0;
+  margin: 7vh 0 2vh 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 #create-bet-button {
-  background-color: #d41212;
+  background-color: rgba(212, 18, 18, .9);
   border-radius: 30px;
   padding: 3vh 4vw 3vh 4vw;
+}
+
+#create-bet-button:hover {
+  background-color: rgba(212, 18, 18, .8);
+  text-decoration: none;
 }

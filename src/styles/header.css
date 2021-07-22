@@ -6,3 +6,11 @@
   justify-content: space-evenly;
   border-bottom: 2px solid #000;
 }
+
+.main-page {
+  display: block;
+}
+
+.MuiDrawer-paperAnchorLeft {
+  background-color: gray;
+}

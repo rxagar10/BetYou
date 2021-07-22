@@ -6,7 +6,6 @@ import {
   Switch
 } from "react-router-dom";
 import "../styles/menu.css";
-import SignUp from "./SignUp";
 
 
 function Menu(props) {
