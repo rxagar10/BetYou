@@ -16,10 +16,10 @@ function Menu(props) {
           <Link id="create-bet-button" className="menu-item">Create Bet</Link>
         </li>
         <li>
-          <Link className="menu-item">Home</Link>
+          <Link to="/" className="menu-item">Home</Link>
         </li>
         <li>
-          <Link className="menu-item">My Account</Link>
+          <Link to="myAccount" className="menu-item">My Account</Link>
         </li>
         <li>
           <Link className="menu-item">Friends</Link>

@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import config from "../config";
-import { useHistory } from "react-router-dom";
 
-function SignUp(props) {
 
+function Login(props) {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   let history = useHistory();
@@ -19,29 +17,22 @@ function SignUp(props) {
 
   const submitForm = () => {
     if (username.length === 0
-        || email.length === 0
-        || password.length === 0
-        || confirmPassword.length === 0) {
+        || password.length === 0) {
       setErrorMessage("Please fill in all fields")
-    } else if (password !== confirmPassword || password.length < 5 || confirmPassword.length < 5) {
-      setErrorMessage("Invalid Password")
-    }
-    else {
-
-      axios.post(config.host + config.port + "/signup", {
+    } else {
+      axios.post(config.host + config.port + "/login", {
         username: username,
-        email: email,
         password: password,
       })
       .then(resp => {
-        const signupMessage = resp.data.signupMessage;
+        const loginMessage = resp.data.loginMessage;
 
-        if (signupMessage === "success") {
+        if (loginMessage === "success") {
           localStorage.setItem("username", username);
           history.push("/")
           window.location.reload();
         } else {
-          setErrorMessage(resp.data.signupMessage);
+          setErrorMessage(resp.data.loginMessage);
         }
       })
     }
@@ -57,12 +48,6 @@ function SignUp(props) {
                  changeText(setUsername, e.target.value)
                }}
         />
-        <label htmlFor="email">Email:</label>
-        <input type="text" name="email"
-               onChange={(e) => {
-                 changeText(setEmail, e.target.value)
-               }}
-        />
 
         <label htmlFor="password">Password:</label>
         <input type="password" name="password"
@@ -71,21 +56,13 @@ function SignUp(props) {
                }}
         />
 
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword"
-               onChange={(e) => {
-                 changeText(setConfirmPassword, e.target.value)
-               }}
-        />
-
-        <button className="signupButton"
+        <button className="loginButton"
                 onClick={() => submitForm()}
         >
-          Sign Up
+          Login
         </button>
       </div>
   )
-
 }
 
-export default SignUp;
+export default Login;
