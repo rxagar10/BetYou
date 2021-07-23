@@ -46,7 +46,7 @@ function Header(props) {
                   onClose={() => toggleDrawer()}
                   classes={{paper: useStyles().paper}}
           >
-            <Menu/>
+            <Menu toggleDrawer={toggleDrawer} />
           </Drawer>
           <h1 className="BetYouTitle">BetYou</h1>
           {
