@@ -30,14 +30,12 @@
   margin: 4vh 0 0 4vh;
   padding: 4px;
   height: max-content;
-  background-color: var(--lighter-gray);
-  border: 1px solid var(--black);
+  background-color: var(--light-gray);
   border-radius: 2vh;
 }
 
 .menuButton:hover {
-  background-color: var(--light-gray);
-  padding: 3px;
+  padding: 1px;
   cursor: pointer;
 }
 

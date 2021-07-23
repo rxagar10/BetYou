@@ -11,6 +11,7 @@ import {
 import SignUp from "./SignUp";
 import Login from "./Login";
 import MyAccount from "./MyAccount";
+import CreateBet from "./CreateBet";
 
 function Header(props) {
 
@@ -78,6 +79,10 @@ function Header(props) {
               &nbsp;
               <MyAccount username={username}/>
             </Route>
+            <Route exact path="/create-bet-button">
+              &nbsp;
+              <CreateBet username={username}/>
+            </Route>
           </Switch>
         </div>
       </Router>
@@ -85,14 +90,5 @@ function Header(props) {
   )
 }
 
-function makeHamburgerMenu() {
-  return (
-      <div className="hamburgerMenu">
-        <div className="menuLines"/>
-        <div className="menuLines"/>
-        <div className="menuLines"/>
-      </div>
-  )
-}
 
 export default Header;
