@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import config from '../config';
+import "../styles/myAccount.css";
 
 function MyAccount(props) {
 
@@ -9,7 +10,6 @@ function MyAccount(props) {
   const [betsWon, setBetsWon] = useState(0)
   const [betsLost, setBetsLost] = useState(0)
   const [betsWitnessed, setBetsWitnessed] = useState(0)
-
 
   useEffect(() => {
     axios.post(config.host + config.port + "/myAccount", {
@@ -25,26 +25,39 @@ function MyAccount(props) {
   })
 
   return (
-      <div>
-        <h1>My Account</h1>
+      <div className="myAccount">
+        <h1 className="page-header">My Account</h1>
 
-        <h4>Username: </h4>
-        <span>{props.username}</span>
+        <div className="myAccountStat">
+          <h4 className="myAccountItemTitle">Username: </h4>
+          <span className="myAccountItem">{props.username}</span>
+        </div>
 
-        <h4>Account Balance: </h4>
-        <span>${accountBalance}</span>
+        <div className="myAccountStat">
+          <h4 className="myAccountItemTitle">Account Balance: </h4>
+          <span className="myAccountItem">${accountBalance}</span>
+        </div>
 
-        <h4>Email: </h4>
-        <span>{email}</span>
+        <div className="myAccountStat">
+          <h4 className="myAccountItemTitle">Email: </h4>
+          <span className="myAccountItem">{email}</span>
+        </div>
 
-        <h4>Bets Won: </h4>
-        <span>{betsWon}</span>
+        <div className="myAccountStat">
+          <h4 className="myAccountItemTitle">Bets Won: </h4>
+          <span className="myAccountItem">{betsWon}</span>
+        </div>
 
-        <h4>Bets Lost: </h4>
-        <span>{betsLost}</span>
+        <div className="myAccountStat">
+          <h4 className="myAccountItemTitle">Bets Lost: </h4>
+          <span className="myAccountItem">{betsLost}</span>
+        </div>
 
-        <h4>Bets Witnessed: </h4>
-        <span>{betsWitnessed}</span>
+        <div className="myAccountStat">
+          <h4 className="myAccountItemTitle">Bets Witnessed: </h4>
+          <span className="myAccountItem">{betsWitnessed}</span>
+        </div>
+
       </div>
   )
 }

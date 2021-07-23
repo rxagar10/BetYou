@@ -1,0 +1,23 @@
+
+.page-header {
+  margin-top: 0;
+}
+
+.myAccount {
+  display: flex;
+  flex-direction: column;
+}
+
+.myAccountStat {
+  margin: 5vh;
+}
+
+.myAccountItemTitle {
+  display: inline;
+  margin: 3vh;
+}
+
+.myAccountItem {
+  font-size: 15px;
+  display: inline;
+}

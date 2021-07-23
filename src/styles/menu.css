@@ -11,20 +11,22 @@ li {
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--black);
 }
 
 a:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #create-bet-button {
-  background-color: rgba(212, 18, 18, .9);
+  background-color: var(--accent-color);
   border-radius: 30px;
   padding: 3vh 4vw 3vh 4vw;
+  color: var(--light-gray)
 }
 
 #create-bet-button:hover {
-  background-color: rgba(212, 18, 18, .8);
+  background-color: var(--accent-color-opaque);
   text-decoration: none;
 }
