@@ -11,7 +11,7 @@ function CreateBet(props) {
 
   const [myFriends, setMyFriends] = useState([]);
 
-  const [friendBet, setFriendBet] = useState("");
+  const [friendBet, setFriendBet] = useState(props.betFriend || "");
   const [witness, setWitness] = useState([]);
   const [betTitle, setBetTitle] = useState("");
   const [terms, setTerms] = useState("");
@@ -29,7 +29,7 @@ function CreateBet(props) {
     }).then((resp) => {
       setMyFriends(resp.data.myFriends)
     })
-  })
+  }, [])
 
   const submitBet = () => {
     if (friendBet === "" ||
@@ -80,6 +80,7 @@ function CreateBet(props) {
         />
         <Autocomplete
             id="betFriend"
+            value={props.betFriend}
             className="createBetFriendSelect"
             options={myFriends}
             getOptionLabel={(option) => option}

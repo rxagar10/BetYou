@@ -8,22 +8,44 @@ function Menu(props) {
   return (
       <ul className="menu-links">
         <li>
-          <Link to="/create-bet-button" id="create-bet-button" className="menu-item" onClick={() => props.toggleDrawer()}>Create Bet</Link>
+          <Link to="/create-bet-button" id="create-bet-button" className="menu-item"
+                onClick={() => {
+                  props.toggleDrawer();
+                  props.getBetFriend("")
+                }}
+          >Create Bet</Link>
         </li>
         <li>
-          <Link to="/" className="menu-item" onClick={() => props.toggleDrawer()}>Home</Link>
+          <Link to="/" className="menu-item"
+                onClick={() => {
+                  props.toggleDrawer();
+                  props.getBetFriend("")
+                }}
+          >Home</Link>
         </li>
         <li>
-          <Link to="/myAccount" className="menu-item" onClick={() => props.toggleDrawer()}>My Account</Link>
+          <Link to="/myAccount" className="menu-item"
+                onClick={() => {
+                  props.toggleDrawer();
+                  props.getBetFriend("")
+                }}
+          >My Account</Link>
         </li>
         <li>
-          <Link className="menu-item" onClick={() => props.toggleDrawer()}>Friends</Link>
+          <Link to="/friends" className="menu-item"
+                onClick={() => {
+                  props.toggleDrawer();
+                  props.getBetFriend("")
+                }}
+          >Friends</Link>
         </li>
         <li>
-          <Link className="menu-item" onClick={() => props.toggleDrawer()}>Current Bets</Link>
-        </li>
-        <li>
-          <Link className="menu-item" onClick={() => props.toggleDrawer()}>Bet History</Link>
+          <Link className="menu-item"
+                onClick={() => {
+                  props.toggleDrawer();
+                  props.getBetFriend("")
+                }}
+          >My Bets</Link>
         </li>
       </ul>
   )

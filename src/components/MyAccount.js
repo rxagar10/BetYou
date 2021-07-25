@@ -22,7 +22,7 @@ function MyAccount(props) {
       setBetsLost(resp.data.betsLost);
       setBetsWitnessed(resp.data.betsWitnessed)
     })
-  })
+  }, [])
 
   return (
       <div className="myAccount">

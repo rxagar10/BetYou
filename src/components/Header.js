@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import "../styles/header.css";
 import Drawer from '@material-ui/core/Drawer';
 import {makeStyles} from '@material-ui/core/styles';
@@ -12,12 +12,14 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import MyAccount from "./MyAccount";
 import CreateBet from "./CreateBet";
+import Friends from "./Friends";
 
 function Header(props) {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [username, setUsername] = useState(
       localStorage.getItem("username") || "");
+  const [betFriend, setBetFriend] = useState(localStorage.getItem("betFriend") || "");
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -34,6 +36,11 @@ function Header(props) {
     }
   })
 
+  const getBetFriend = (friend) => {
+    setBetFriend(friend);
+    localStorage.setItem("betFriend", friend)
+  }
+
   return (
       <Router>
         <div className="header">
@@ -42,12 +49,11 @@ function Header(props) {
             <div className="menuLines"/>
             <div className="menuLines"/>
           </div>
-          {/*<button className="menuButton" onClick={() => toggleDrawer()}>Menu</button>*/}
           <Drawer className="menu-drawer" open={drawerOpen}
                   onClose={() => toggleDrawer()}
                   classes={{paper: useStyles().paper}}
           >
-            <Menu toggleDrawer={toggleDrawer} />
+            <Menu toggleDrawer={toggleDrawer} getBetFriend={getBetFriend} />
           </Drawer>
           <h1 className="BetYouTitle">BetYou</h1>
           {
@@ -81,7 +87,11 @@ function Header(props) {
             </Route>
             <Route exact path="/create-bet-button">
               &nbsp;
-              <CreateBet username={username}/>
+              <CreateBet username={username} betFriend={betFriend}/>
+            </Route>
+            <Route exact path="/friends">
+              &nbsp;
+              <Friends username={username} getBetFriend={getBetFriend}/>
             </Route>
           </Switch>
         </div>
