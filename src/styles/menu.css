@@ -9,15 +9,16 @@ li {
   margin: 7vh 0 2vh 0;
 }
 
-a {
+a, .userButton {
   text-decoration: none;
   color: var(--black);
 }
 
-a:hover {
+a:hover, #userButton:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
 
 #create-bet-button {
   background-color: var(--accent-color);

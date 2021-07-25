@@ -1,0 +1,186 @@
+
+.createBet {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-row-gap: 3vh;
+}
+
+.page-header {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+.createBetTitle {
+  grid-row-start: 2;
+  grid-column-end: 4;
+  font-size: 20px;
+  justify-self: end;
+  align-self: center;
+}
+
+.createBetTitleInput {
+  grid-row-start: 2;
+  grid-column-start: 4;
+  grid-column-end: 11;
+  justify-self: center;
+  width: 90%;
+  height: 7vh;
+  align-self: center;
+  font-size: 25px;
+}
+
+.createBetFriendLabel {
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+  margin: 2vh 5vh 0 2vh;
+}
+
+.createBetFriendInfo {
+  grid-row-start: 3;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+  margin: 2vh 0 0 1vw;
+}
+
+.createBetFriendSelect {
+  grid-row-start: 3;
+  grid-column-start: 4;
+  grid-column-end: 11;
+  justify-self: center;
+  width: 90%;
+  height: 5vh;
+}
+
+.termsLabel {
+  grid-row-start: 4;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+}
+
+.terms {
+  grid-row-start: 4;
+  grid-column-start: 4;
+  grid-column-end: 11;
+  justify-self: center;
+  width: 90%;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.witnessesLabel {
+  grid-row-start: 5;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+  margin: 2vh 5vh 0 2vh;
+}
+
+.witnessesInfo {
+  grid-row-start: 5;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+  margin: 2vh 0 0 1vw;
+}
+
+.witnesses {
+  grid-row-start: 5;
+  grid-column-start: 4;
+  grid-column-end: 11;
+  justify-self: center;
+  width: 90%;
+  height: 5vh;
+}
+
+.amountLabel {
+  grid-row-start: 6;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+  margin-right: 2.5vw;
+}
+
+.amountInfo {
+  grid-row-start: 6;
+  grid-column-end: 4;
+  justify-self: end;
+  align-self: center;
+  margin-right: .5vw;
+}
+
+.amount {
+  grid-row-start: 6;
+  grid-column-start: 4;
+  grid-column-end: 5;
+  justify-self: end;
+  width: 90%;
+}
+
+.oppAmountLabel {
+  grid-row-start: 6;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  align-self: center;
+  justify-self: end;
+  margin-right: 2vw;
+}
+
+.oppAmountInfo {
+  grid-row-start: 6;
+  grid-column-end: 7;
+  justify-self: end;
+  align-self: center;
+}
+
+.oppAmount {
+  grid-row-start: 6;
+  grid-column-start: 7;
+  grid-column-end: 8;
+  width: 90%;
+  justify-self: end;
+}
+
+.settleDateLabel {
+  grid-row-start: 7;
+  grid-column-start: 4;
+  grid-column-end: 6;
+  justify-self: center;
+  align-self: center;
+}
+
+.settleDate {
+  grid-row-start: 7;
+  grid-column-start: 1;
+  grid-column-end: 11;
+  justify-self: center;
+  width: 10%;
+}
+
+.submitBet {
+  grid-row-start: 8;
+  grid-column-start: 1;
+  grid-column-end: 11;
+  justify-self: center;
+  align-self: center;
+  background-color: var(--accent-color);
+  color: var(--light-gray);
+  border: none;
+  padding: 3vh 4vw 3vh 4vw;
+  border-radius: 30px;
+}
+
+.submitBet:hover {
+  background-color: var(--accent-color-opaque);
+  cursor: pointer;
+}
+
+

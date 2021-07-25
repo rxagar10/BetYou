@@ -54,13 +54,13 @@ function Header(props) {
             username === undefined || username === ""
                 ?
                 <div className="accountButtons">
-                  <Link to="/signup">Sign Up</Link>
-                  <Link to="/login">Log In</Link>
+                  <Link to="/signup" className="signup">Sign Up</Link>
+                  <Link to="/login" className="login">Log In</Link>
                 </div>
                 :
-                <a className="accountButtons" onClick={() => logOut()}>
+                <div className="accountButtons" id="userButton" onClick={() => logOut()}>
                   {username}
-                </a>
+                </div>
           }
         </div>
 
