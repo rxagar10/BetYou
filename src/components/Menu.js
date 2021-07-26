@@ -40,7 +40,7 @@ function Menu(props) {
           >Friends</Link>
         </li>
         <li>
-          <Link className="menu-item"
+          <Link to="/myBets" className="menu-item"
                 onClick={() => {
                   props.toggleDrawer();
                   props.getBetFriend("")

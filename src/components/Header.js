@@ -13,6 +13,7 @@ import Login from "./Login";
 import MyAccount from "./MyAccount";
 import CreateBet from "./CreateBet";
 import Friends from "./Friends";
+import MyBets from "./MyBets";
 
 function Header(props) {
 
@@ -92,6 +93,10 @@ function Header(props) {
             <Route exact path="/friends">
               &nbsp;
               <Friends username={username} getBetFriend={getBetFriend}/>
+            </Route>
+            <Route exact path="/myBets">
+              &nbsp;
+              <MyBets username={username}/>
             </Route>
           </Switch>
         </div>
