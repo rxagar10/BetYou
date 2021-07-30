@@ -8,18 +8,18 @@ function Menu(props) {
   return (
       <ul className="menu-links">
         <li>
-          <Link to="/create-bet-button" id="create-bet-button" className="menu-item"
+          <Link to="/create-rec-button" id="create-rec-button" className="menu-item"
                 onClick={() => {
                   props.toggleDrawer();
-                  props.getBetFriend("")
+                  props.getFriend("")
                 }}
-          >Create Bet</Link>
+          >Create Rec</Link>
         </li>
         <li>
           <Link to="/" className="menu-item"
                 onClick={() => {
                   props.toggleDrawer();
-                  props.getBetFriend("")
+                  props.getFriend("")
                 }}
           >Home</Link>
         </li>
@@ -27,7 +27,7 @@ function Menu(props) {
           <Link to="/myAccount" className="menu-item"
                 onClick={() => {
                   props.toggleDrawer();
-                  props.getBetFriend("")
+                  props.getFriend("")
                 }}
           >My Account</Link>
         </li>
@@ -35,17 +35,17 @@ function Menu(props) {
           <Link to="/friends" className="menu-item"
                 onClick={() => {
                   props.toggleDrawer();
-                  props.getBetFriend("")
+                  props.getFriend("")
                 }}
           >Friends</Link>
         </li>
         <li>
-          <Link to="/myBets" className="menu-item"
+          <Link to="/myRecs" className="menu-item"
                 onClick={() => {
                   props.toggleDrawer();
-                  props.getBetFriend("")
+                  props.getFriend("")
                 }}
-          >My Bets</Link>
+          >My Recs</Link>
         </li>
       </ul>
   )

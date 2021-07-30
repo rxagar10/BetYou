@@ -8,10 +8,6 @@
   flex-direction: column;
 }
 
-.myAccountStat {
-  margin: 5vh;
-}
-
 .myAccountItemTitle {
   display: inline;
   margin: 3vh;

@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 import "../styles/createBet.css";
 import InfoPopup from "./misc-components/InfoPopup";
 
-function CreateBet(props) {
+function CreateRec(props) {
 
   const [myFriends, setMyFriends] = useState([]);
 
@@ -153,4 +153,4 @@ function CreateBet(props) {
 
 }
 
-export default CreateBet
+export default CreateRec

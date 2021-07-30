@@ -45,11 +45,11 @@ function Friends(props) {
                   <div className="friend">
                     <h3>{friend.firstName + " " + friend.lastName}</h3>
                     <p>{friend.username}</p>
-                    <button className="betFriendButton" onClick={() => {
-                      props.getBetFriend(friend.username);
-                      history.push("/create-bet-button");
+                    <button className="recFriendButton" onClick={() => {
+                      props.getFriend(friend.username);
+                      history.push("/create-rec-button");
 
-                    }}>Bet This Friend
+                    }}>Send a Rec to This Friend
                     </button>
                   </div>
               )

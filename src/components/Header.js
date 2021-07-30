@@ -11,7 +11,7 @@ import {
 import SignUp from "./SignUp";
 import Login from "./Login";
 import MyAccount from "./MyAccount";
-import CreateBet from "./CreateBet";
+import CreateRec from "./CreateRec";
 import Friends from "./Friends";
 import MyBets from "./MyBets";
 
@@ -20,7 +20,7 @@ function Header(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [username, setUsername] = useState(
       localStorage.getItem("username") || "");
-  const [betFriend, setBetFriend] = useState(localStorage.getItem("betFriend") || "");
+  const [friend, setFriend] = useState(localStorage.getItem("friend") || "");
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -37,9 +37,9 @@ function Header(props) {
     }
   })
 
-  const getBetFriend = (friend) => {
-    setBetFriend(friend);
-    localStorage.setItem("betFriend", friend)
+  const getFriend = (fri) => {
+    setFriend(fri);
+    localStorage.setItem("friend", fri)
   }
 
   return (
@@ -54,9 +54,9 @@ function Header(props) {
                   onClose={() => toggleDrawer()}
                   classes={{paper: useStyles().paper}}
           >
-            <Menu toggleDrawer={toggleDrawer} getBetFriend={getBetFriend} />
+            <Menu toggleDrawer={toggleDrawer} getFriend={getFriend} />
           </Drawer>
-          <h1 className="BetYouTitle">BetYou</h1>
+          <h1 className="RecommenderTitle">Recommender</h1>
           {
             username === undefined || username === ""
                 ?
@@ -86,15 +86,15 @@ function Header(props) {
               &nbsp;
               <MyAccount username={username}/>
             </Route>
-            <Route exact path="/create-bet-button">
+            <Route exact path="/create-rec-button">
               &nbsp;
-              <CreateBet username={username} betFriend={betFriend}/>
+              <CreateRec username={username} friend={friend}/>
             </Route>
             <Route exact path="/friends">
               &nbsp;
-              <Friends username={username} getBetFriend={getBetFriend}/>
+              <Friends username={username} getFriend={getFriend}/>
             </Route>
-            <Route exact path="/myBets">
+            <Route exact path="/myRecs">
               &nbsp;
               <MyBets username={username}/>
             </Route>
