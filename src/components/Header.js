@@ -13,9 +13,10 @@ import Login from "./Login";
 import MyAccount from "./MyAccount";
 import CreateRec from "./CreateRec";
 import Friends from "./Friends";
-import MyBets from "./MyBets";
+import MyRecs from "./MyRecs";
+import Home from "./Home";
 
-function Header(props) {
+function Header() {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [username, setUsername] = useState(
@@ -56,7 +57,7 @@ function Header(props) {
           >
             <Menu toggleDrawer={toggleDrawer} getFriend={getFriend} />
           </Drawer>
-          <h1 className="RecommenderTitle">Recommender</h1>
+          <h1 className="RecommenderTitle"><a href={"/"}>Recommender</a></h1>
           {
             username === undefined || username === ""
                 ?
@@ -74,7 +75,7 @@ function Header(props) {
         <div className="body-page">
           <Switch>
             <Route exact path="/">
-              <div>Home page</div>
+              <Home username={username} />
             </Route>
             <Route exacct path="/signup">
               <SignUp/>
@@ -96,7 +97,7 @@ function Header(props) {
             </Route>
             <Route exact path="/myRecs">
               &nbsp;
-              <MyBets username={username}/>
+              <MyRecs username={username}/>
             </Route>
           </Switch>
         </div>

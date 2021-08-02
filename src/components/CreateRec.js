@@ -6,7 +6,7 @@ import axios from 'axios';
 import config from "../config";
 import {useHistory} from "react-router-dom";
 
-function CreateRec(props) {
+function CreateRec({ username }) {
 
   // const [movie, setMovie] = useState({
   //   genres: "",
@@ -37,11 +37,11 @@ function CreateRec(props) {
 
   useEffect(() => {
     axios.post(config.host + config.port + "/createRec", {
-      username: props.username
+      username
     }).then((resp) => {
       setMyFriends(resp.data.myFriends)
     })
-  }, [])
+  }, [username])
 
   const makeTitle = () => {
     if (recType === "") {
@@ -177,7 +177,7 @@ function CreateRec(props) {
       setErrorMessage("Please fill in the required fields")
     } else {
       axios.post(config.host + config.port + "/submitRec", {
-        username: props.username,
+        username,
         recType,
         title,
         genres,

@@ -6,7 +6,7 @@ import {Modal} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-function Friends(props) {
+function Friends({ username, getFriend }) {
 
   const [myFriends, setMyFriends] = useState([]);
   const [pendingFriends, setPendingFriends] = useState([]);
@@ -19,14 +19,14 @@ function Friends(props) {
 
   useEffect(() => {
     axios.post(config.host + config.port + "/friends", {
-      username: props.username,
+      username,
     })
     .then(resp => {
       setMyFriends(resp.data.myFriends);
       setPendingFriends(resp.data.pendingFriends);
       setAllUsers(resp.data.allUsers);
     })
-  }, [])
+  }, [username])
 
   const togglePendingModal = () => {
     setPendingModalOpen(!pendingModalOpen);
@@ -46,7 +46,7 @@ function Friends(props) {
                     <h3>{friend.firstName + " " + friend.lastName}</h3>
                     <p>{friend.username}</p>
                     <button className="recFriendButton" onClick={() => {
-                      props.getFriend(friend.username);
+                      getFriend(friend.username);
                       history.push("/create-rec-button");
 
                     }}>Send a Rec to This Friend
@@ -84,9 +84,9 @@ function Friends(props) {
 
   const handlePending = (status, friendUsername) => {
     axios.post(config.host + config.port + "/pendingStatus", {
-      username: props.username,
-      friendUsername: friendUsername,
-      status: status,
+      username,
+      friendUsername,
+      status,
     })
     .then(resp => {
       setMyFriends(resp.data.myFriends);
@@ -121,8 +121,8 @@ function Friends(props) {
 
   const sendRequest = (friend) => {
     axios.post(config.host + config.port + "/sendRequest", {
-      username: props.username,
-      friend: friend,
+      username,
+      friend,
     })
     .then((resp) => {
       setAllUsers(resp.data.allUsers);

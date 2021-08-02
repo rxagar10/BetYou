@@ -4,7 +4,7 @@ import axios from "axios";
 import config from "../config";
 
 
-function Login(props) {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

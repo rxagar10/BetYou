@@ -3,47 +3,47 @@ import { Link } from "react-router-dom";
 import "../styles/menu.css";
 
 
-function Menu(props) {
+function Menu({ toggleDrawer, getFriend}) {
 
   return (
       <ul className="menu-links">
         <li>
           <Link to="/create-rec-button" id="create-rec-button" className="menu-item"
                 onClick={() => {
-                  props.toggleDrawer();
-                  props.getFriend("")
+                  toggleDrawer();
+                  getFriend("")
                 }}
           >Create Rec</Link>
         </li>
         <li>
           <Link to="/" className="menu-item"
                 onClick={() => {
-                  props.toggleDrawer();
-                  props.getFriend("")
+                  toggleDrawer();
+                  getFriend("")
                 }}
           >Home</Link>
         </li>
         <li>
           <Link to="/myAccount" className="menu-item"
                 onClick={() => {
-                  props.toggleDrawer();
-                  props.getFriend("")
+                  toggleDrawer();
+                  getFriend("")
                 }}
           >My Account</Link>
         </li>
         <li>
           <Link to="/friends" className="menu-item"
                 onClick={() => {
-                  props.toggleDrawer();
-                  props.getFriend("")
+                  toggleDrawer();
+                  getFriend("")
                 }}
           >Friends</Link>
         </li>
         <li>
           <Link to="/myRecs" className="menu-item"
                 onClick={() => {
-                  props.toggleDrawer();
-                  props.getFriend("")
+                  toggleDrawer();
+                  getFriend("")
                 }}
           >My Recs</Link>
         </li>

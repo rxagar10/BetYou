@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../config";
 import { useHistory } from "react-router-dom";
 
-function SignUp(props) {
+function SignUp() {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

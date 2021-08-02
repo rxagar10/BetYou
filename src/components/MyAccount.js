@@ -3,20 +3,20 @@ import axios from 'axios';
 import config from '../config';
 import "../styles/myAccount.css";
 
-function MyAccount(props) {
+function MyAccount({ username }) {
 
   const [email, setEmail] = useState("");
   const [accountBalance, setAccountBalance] = useState(0);
 
   useEffect(() => {
     axios.post(config.host + config.port + "/myAccount", {
-      username: props.username,
+      username,
     })
     .then(resp => {
       setEmail(resp.data.email);
       setAccountBalance(resp.data.accountBalance);
     })
-  }, [])
+  }, [username])
 
   return (
       <div className="myAccount">
@@ -24,7 +24,7 @@ function MyAccount(props) {
 
         <div className="myAccountStat">
           <h4 className="myAccountItemTitle">Username: </h4>
-          <span className="myAccountItem">{props.username}</span>
+          <span className="myAccountItem">{username}</span>
         </div>
 
         <div className="myAccountStat">
