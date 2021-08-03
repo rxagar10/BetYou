@@ -31,6 +31,8 @@ function CreateRec({ username }) {
   const [year, setYear] = useState("");
   const [numberOfSeasons, setNumberOfSeasons] = useState("");
   const [numberOfEpisodes, setNumberOfEpisodes] = useState("");
+
+  const [image, setImage] = useState("");
   const [comments, setComments] = useState("");
 
   let history = useHistory()
@@ -55,19 +57,18 @@ function CreateRec({ username }) {
               const selectedTitle = titlesList.find((title) => (title.title === e.target.value))
               if(selectedTitle !== undefined) {
                 setTitle(e.target.value)
-                setGenres(selectedTitle.genres)
-                setOverview(selectedTitle.overview)
-                setRuntime(selectedTitle.runtime)
                 setYear(selectedTitle.year)
-                setNumberOfEpisodes(selectedTitle.numberOfEpisodes)
-                setNumberOfSeasons(selectedTitle.numberOfSeasons)
+                setImage(selectedTitle.imagePath)
+                getMovieFromTitle(selectedTitle.id)
               }
             }} value={tempTitle}/>
 
             <datalist id="titles">
               {
                 titlesList.map(title => {
-                  return <option label={" (" + title.year + ")"} value={title.title} />
+                  return (
+                      <option label={" (" + title.year + ")"} value={title.title} />
+                      )
                 })
               }
             </datalist>
@@ -78,19 +79,33 @@ function CreateRec({ username }) {
     }
   }
 
+  const getMovieFromTitle = (id) => {
+    axios.post(config.host + config.port + "/getFromId", {
+      id,
+      recType,
+    })
+    .then(resp => {
+      const titleInfo = resp.data.titleInfo;
+      setGenres(titleInfo.genre)
+      setOverview(titleInfo.overview)
+      setRuntime(titleInfo.runtime)
+      setNumberOfEpisodes(titleInfo.numberOfEpisodes)
+      setNumberOfSeasons(titleInfo.numberOfSeasons)
+    })
+  }
+
   const searchTitle = () => {
+    console.log(tempTitle)
     axios.post(config.host + config.port + "/searchTitle", {
-      title
+      title: tempTitle,
+      recType,
     })
     .then((resp) => {
       setTitlesList(resp.data.titlesList)
-
     })
   }
 
   const generateRecForm = () => {
-    console.log(title)
-    console.log(recType)
     if (recType === "") {
       return <p>Select the type of recommendation</p>
     } else if (title === "") {
@@ -124,6 +139,8 @@ function CreateRec({ username }) {
             }} value={comments}/>
 
             <button className="submitRec" onClick={() => submitRec()}>Send Rec</button>
+
+            <img src={image} alt="Poster Image" width="400" height="auto" />
           </div>
       )
     } else if (recType === "TVShow") {
@@ -156,6 +173,8 @@ function CreateRec({ username }) {
             }} value={comments}/>
 
             <button className="submitRec" onClick={() => submitRec()}>Send Rec</button>
+
+            <img src={image} alt="Poster Image" width="400" height="auto" />
 
           </div>
       )
