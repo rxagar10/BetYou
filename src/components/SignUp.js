@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 
 function SignUp() {
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,12 +15,10 @@ function SignUp() {
 
   let history = useHistory();
 
-  const changeText = (setField, text) => {
-    setField(text);
-  }
-
   const submitForm = () => {
-    if (username.length === 0
+    if (firstName.length === 0
+        || lastName.length === 0
+        || username.length === 0
         || email.length === 0
         || password.length === 0
         || confirmPassword.length === 0) {
@@ -29,9 +29,11 @@ function SignUp() {
     else {
 
       axios.post(config.host + config.port + "/signup", {
-        username: username,
-        email: email,
-        password: password,
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
       })
       .then(resp => {
         const signupMessage = resp.data.signupMessage;
@@ -51,30 +53,44 @@ function SignUp() {
       <div className="signup">
         <p>{errorMessage}</p>
 
+        <label htmlFor="firstName">First Name:</label>
+        <input type="text" name="firstName"
+               onChange={(e) => {
+                 setFirstName(e.target.value)
+               }}
+        />
+
+        <label htmlFor="lastName">Last Name:</label>
+        <input type="text" name="lastName"
+               onChange={(e) => {
+                 setLastName(e.target.value)
+               }}
+        />
+
         <label for="username">Username:</label>
         <input type="text" name="username"
                onChange={(e) => {
-                 changeText(setUsername, e.target.value)
+                 setUsername(e.target.value)
                }}
         />
         <label htmlFor="email">Email:</label>
         <input type="text" name="email"
                onChange={(e) => {
-                 changeText(setEmail, e.target.value)
+                 setEmail(e.target.value)
                }}
         />
 
         <label htmlFor="password">Password:</label>
         <input type="password" name="password"
                onChange={(e) => {
-                 changeText(setPassword, e.target.value)
+                 setPassword(e.target.value)
                }}
         />
 
         <label htmlFor="confirmPassword">Confirm Password:</label>
         <input type="password" name="confirmPassword"
                onChange={(e) => {
-                 changeText(setConfirmPassword, e.target.value)
+                 setConfirmPassword(e.target.value)
                }}
         />
 
