@@ -18,14 +18,16 @@ function Friends({ username, getFriend }) {
   let history = useHistory();
 
   useEffect(() => {
-    axios.post(config.host + config.port + "/friends", {
-      username,
-    })
-    .then(resp => {
-      setMyFriends(resp.data.myFriends);
-      setPendingFriends(resp.data.pendingFriends);
-      setAllUsers(resp.data.allUsers);
-    })
+    if(username !== "") {
+      axios.post(config.host + config.port + "/friends", {
+        username,
+      })
+      .then(resp => {
+        setMyFriends(resp.data.myFriends);
+        setPendingFriends(resp.data.pendingFriends);
+        setAllUsers(resp.data.allUsers);
+      })
+    }
   }, [username])
 
   const togglePendingModal = () => {
@@ -60,6 +62,7 @@ function Friends({ username, getFriend }) {
   }
 
   const makePendingFriendsList = () => {
+    console.log(pendingFriends)
     return (
         <div>
           {
@@ -91,6 +94,7 @@ function Friends({ username, getFriend }) {
     .then(resp => {
       setMyFriends(resp.data.myFriends);
       setPendingFriends(resp.data.pendingFriends);
+      setAllUsers(resp.data.allUsers);
     })
   }
 
@@ -125,6 +129,8 @@ function Friends({ username, getFriend }) {
       friend,
     })
     .then((resp) => {
+      setMyFriends(resp.data.myFriends);
+      setPendingFriends(resp.data.pendingFriends);
       setAllUsers(resp.data.allUsers);
     })
   }
