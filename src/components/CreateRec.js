@@ -6,7 +6,7 @@ import axios from 'axios';
 import config from "../config";
 import {useHistory} from "react-router-dom";
 
-function CreateRec({ username }) {
+function CreateRec({username}) {
 
   // const [movie, setMovie] = useState({
   //   genres: "",
@@ -54,8 +54,9 @@ function CreateRec({ username }) {
             <label htmlFor="title">Title</label>
             <input list="titles" name="title" onChange={(e) => {
               setTempTitle(e.target.value)
-              const selectedTitle = titlesList.find((title) => (title.title === e.target.value))
-              if(selectedTitle !== undefined) {
+              const selectedTitle = titlesList.find(
+                  (title) => (title.title === e.target.value))
+              if (selectedTitle !== undefined) {
                 setTitle(e.target.value)
                 setYear(selectedTitle.year)
                 setImage(selectedTitle.imagePath)
@@ -67,8 +68,9 @@ function CreateRec({ username }) {
               {
                 titlesList.map(title => {
                   return (
-                      <option label={" (" + title.year + ")"} value={title.title} />
-                      )
+                      <option label={" (" + title.year + ")"}
+                              value={title.title}/>
+                  )
                 })
               }
             </datalist>
@@ -138,9 +140,10 @@ function CreateRec({ username }) {
               setComments(e.target.value)
             }} value={comments}/>
 
-            <button className="submitRec" onClick={() => submitRec()}>Send Rec</button>
+            <button className="submitRec" onClick={() => submitRec()}>Send Rec
+            </button>
 
-            <img src={image} alt="Poster Image" width="400" height="auto" />
+            <img src={image} alt="Poster Image" width="400" height="auto"/>
           </div>
       )
     } else if (recType === "TVShow") {
@@ -172,9 +175,10 @@ function CreateRec({ username }) {
               setComments(e.target.value)
             }} value={comments}/>
 
-            <button className="submitRec" onClick={() => submitRec()}>Send Rec</button>
+            <button className="submitRec" onClick={() => submitRec()}>Send Rec
+            </button>
 
-            <img src={image} alt="Poster Image" width="400" height="auto" />
+            <img src={image} alt="Poster Image" width="400" height="auto"/>
 
           </div>
       )
@@ -196,20 +200,22 @@ function CreateRec({ username }) {
       setErrorMessage("Please fill in the required fields")
     } else {
       axios.post(config.host + config.port + "/submitRec", {
-        username,
-        recType,
-        title,
-        genres,
-        overview,
-        runtime,
-        year,
-        numberOfSeasons,
-        numberOfEpisodes,
-        comments,
         friendsList,
+        recData: {
+          sentFrom: username,
+          recType,
+          title,
+          genre: genres,
+          overview,
+          runtime,
+          year,
+          numberOfSeasons,
+          numberOfEpisodes,
+          comments,
+        }
       })
       .then((resp) => {
-        if(resp.data.message === 'success') {
+        if (resp.data.message === 'success') {
           history.push("/")
         }
       })
@@ -223,14 +229,16 @@ function CreateRec({ username }) {
         <p>{errorMessage}</p>
 
 
-        <label htmlFor="friends" className="createRecFriendLabel">Send Rec to Friends</label>
+        <label htmlFor="friends" className="createRecFriendLabel">Send Rec to
+          Friends</label>
 
         <Autocomplete
             multiple
             id="friends"
             className="friendsList"
             options={myFriends}
-            getOptionLabel={(option) => option}
+            getOptionLabel={(option) => option.firstName + " "
+                + option.lastName}
             onChange={(event, newValue) => {
               if (friendsList.includes(newValue)) {
                 setFriendsList(friendsList.filter(fri => fri !== newValue))
@@ -244,60 +252,67 @@ function CreateRec({ username }) {
         />
 
         <label htmlFor="Movie">Movie</label>
-        <input type="radio" name="recOption" id="Movie" value="Movie" onClick={() => {
-          setRecType("Movie")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        } }/>
+        <input type="radio" name="recOption" id="Movie" value="Movie"
+               onClick={() => {
+                 setRecType("Movie")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         <label htmlFor="TVShow">TV Show</label>
-        <input type="radio" name="recOption" id="TVShow" value="TVShow" onClick={() => {
-          setRecType("TVShow")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        }}/>
+        <input type="radio" name="recOption" id="TVShow" value="TVShow"
+               onClick={() => {
+                 setRecType("TVShow")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         <label htmlFor="Music">Music</label>
-        <input type="radio" name="recOption" id="Music" value="Music" onClick={() => {
-          setRecType("Music")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        }}/>
+        <input type="radio" name="recOption" id="Music" value="Music"
+               onClick={() => {
+                 setRecType("Music")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         <label htmlFor="Book">Book</label>
-        <input type="radio" name="recOption" id="Book" value="Book" onClick={() => {
-          setRecType("Book")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        }}/>
+        <input type="radio" name="recOption" id="Book" value="Book"
+               onClick={() => {
+                 setRecType("Book")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         <label htmlFor="Restaurant">Restaurant</label>
-        <input type="radio" name="recOption" id="Restaurant" value="Restaurant" onClick={() => {
-          setRecType("Restaurant")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        }}/>
+        <input type="radio" name="recOption" id="Restaurant" value="Restaurant"
+               onClick={() => {
+                 setRecType("Restaurant")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         <label htmlFor="Games">Game</label>
-        <input type="radio" name="recOption" id="Game" value="Game" onClick={() => {
-          setRecType("Game")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        }}/>
+        <input type="radio" name="recOption" id="Game" value="Game"
+               onClick={() => {
+                 setRecType("Game")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         <label htmlFor="Other">Other</label>
-        <input type="radio" name="recOption" id="Other" value="Other" onClick={() => {
-          setRecType("Other")
-          setTitle("")
-          setTitlesList([])
-          setTempTitle("")
-        }}/>
+        <input type="radio" name="recOption" id="Other" value="Other"
+               onClick={() => {
+                 setRecType("Other")
+                 setTitle("")
+                 setTitlesList([])
+                 setTempTitle("")
+               }}/>
 
         {
           makeTitle()
@@ -309,6 +324,5 @@ function CreateRec({ username }) {
       </div>
   )
 }
-
 
 export default CreateRec;
