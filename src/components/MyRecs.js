@@ -24,7 +24,7 @@ function MyRecs({ username }) {
             let recItems = [];
             for (const key in rec) {
               if (rec.hasOwnProperty(key)) {
-                if (rec[key] !== null && key !== "title" && key !== "to") {
+                if (rec[key] !== null && key !== "title" && key !== "sentTo" && key !== "image" && key !== "id") {
                   recItems.push({ key: key, val: rec[key] });
                 }
               }
@@ -32,9 +32,9 @@ function MyRecs({ username }) {
 
             return (
                 <div className="rec">
-                  <p>Sent to {rec.to}</p>
+                  <p>Sent to {rec.sentTo}</p>
                   <h3>{rec.title}</h3>
-
+                  <img src={rec.image} alt={rec.image} width="200px" height="auto"/>
                   {
                     recItems.map(item => {
                       return <p>{item.key}: {item.val}</p>

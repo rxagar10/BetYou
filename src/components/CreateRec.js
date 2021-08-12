@@ -212,6 +212,7 @@ function CreateRec({username}) {
           numberOfSeasons,
           numberOfEpisodes,
           comments,
+          image,
         }
       })
       .then((resp) => {
