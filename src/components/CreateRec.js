@@ -32,6 +32,14 @@ function CreateRec({username}) {
   const [numberOfSeasons, setNumberOfSeasons] = useState("");
   const [numberOfEpisodes, setNumberOfEpisodes] = useState("");
 
+  const [musicType, setMusicType] = useState("")
+  const [artist, setArtist] = useState("")
+  const [album, setAlbum] = useState("")
+  const [numAlbums, setNumAlbums] = useState("")
+  const [numTracks, setNumTracks] = useState("")
+  const [explicit, setExplicit] = useState("")
+  const [share, setShare] = useState("")
+
   const [image, setImage] = useState("");
   const [comments, setComments] = useState("");
 
@@ -60,7 +68,7 @@ function CreateRec({username}) {
                 setTitle(e.target.value)
                 setYear(selectedTitle.year)
                 setImage(selectedTitle.imagePath)
-                getMovieFromTitle(selectedTitle.id)
+                getFromTitle(selectedTitle.id)
               }
             }} value={tempTitle}/>
 
@@ -81,10 +89,23 @@ function CreateRec({username}) {
     }
   }
 
-  const getMovieFromTitle = (id) => {
+  const searchTitle = () => {
+    console.log(tempTitle)
+    axios.post(config.host + config.port + "/searchTitle", {
+      title: tempTitle,
+      recType,
+      musicType,
+    })
+    .then((resp) => {
+      setTitlesList(resp.data.titlesList)
+    })
+  }
+
+  const getFromTitle = (id) => {
     axios.post(config.host + config.port + "/getFromId", {
       id,
       recType,
+      musicType,
     })
     .then(resp => {
       const titleInfo = resp.data.titleInfo;
@@ -93,23 +114,23 @@ function CreateRec({username}) {
       setRuntime(titleInfo.runtime)
       setNumberOfEpisodes(titleInfo.numberOfEpisodes)
       setNumberOfSeasons(titleInfo.numberOfSeasons)
-    })
-  }
-
-  const searchTitle = () => {
-    console.log(tempTitle)
-    axios.post(config.host + config.port + "/searchTitle", {
-      title: tempTitle,
-      recType,
-    })
-    .then((resp) => {
-      setTitlesList(resp.data.titlesList)
+      setArtist(titleInfo.artist)
+      setAlbum(titleInfo.album)
+      setNumAlbums(titleInfo.numberOfAlbum)
+      setNumTracks(titleInfo.numberOfTracks)
+      setExplicit(titleInfo.explicit)
+      setShare(titleInfo.share)
+      if(titleInfo.image) {
+        setImage(titleInfo.image)
+      }
     })
   }
 
   const generateRecForm = () => {
     if (recType === "") {
       return <p>Select the type of recommendation</p>
+    } else if(recType === "Music" && musicType === "") {
+      return <p>Select the type of music recommendation</p>
     } else if (title === "") {
       return <p>Search for the title of your recommendation</p>
     } else if (recType === "Movie") {
@@ -183,7 +204,96 @@ function CreateRec({username}) {
           </div>
       )
     } else if (recType === "Music") {
+      switch(musicType) {
+        case "artist":
+          return (
+              <div className="musicForm">
+                <label htmlFor="numAlbums">Number of Albums</label>
+                <input type="text" name="numAlbums" onChange={(e) => {
+                  setNumAlbums(e.target.value)
+                }} value={numAlbums}/>
+                <label htmlFor="comments">Comments</label>
+                <input type="text" name="comments" onChange={(e) => {
+                  setComments(e.target.value)
+                }} value={comments}/>
 
+                <button className="submitRec" onClick={() => submitRec()}>Send Rec
+                </button>
+
+                <img src={image} alt="Poster Image" width="400" height="auto"/>
+              </div>
+          )
+          break;
+        case "album":
+          return (
+              <div className="musicForm">
+                <label htmlFor="artist">Artist</label>
+                <input type="text" name="artist" onChange={(e) => {
+                  setArtist(e.target.value)
+                }} value={artist}/>
+                <label htmlFor="numTracks">Number of Tracks</label>
+                <input type="text" name="numTracks" onChange={(e) => {
+                  setNumTracks(e.target.value)
+                }} value={numTracks}/>
+                <label htmlFor="genre">Genre</label>
+                <input type="text" name="genre" onChange={(e) => {
+                  setGenres(e.target.value)
+                }} value={genres}/>
+                <label htmlFor="year">Year</label>
+                <input type="text" name="year" onChange={(e) => {
+                  setYear(e.target.value)
+                }} value={year}/>
+                <label htmlFor="explicit">Explicit?</label>
+                <input type="text" name="explicit" onChange={(e) => {
+                  setExplicit(e.target.value)
+                }} value={explicit}/>
+                <label htmlFor="comments">Comments</label>
+                <input type="text" name="comments" onChange={(e) => {
+                  setComments(e.target.value)
+                }} value={comments}/>
+
+                <button className="submitRec" onClick={() => submitRec()}>Send Rec
+                </button>
+
+                <img src={image} alt="Poster Image" width="400" height="auto"/>
+              </div>
+          )
+          break;
+        case "track":
+          return (
+              <div className="musicForm">
+                <label htmlFor="artist">Artist</label>
+                <input type="text" name="artist" onChange={(e) => {
+                  setArtist(e.target.value)
+                }} value={artist}/>
+                <label htmlFor="album">Album</label>
+                <input type="text" name="album" onChange={(e) => {
+                  setAlbum(e.target.value)
+                }} value={album}/>
+                <label htmlFor="year">Year</label>
+                <input type="text" name="year" onChange={(e) => {
+                  setYear(e.target.value)
+                }} value={year}/>
+                <label htmlFor="explicit">Explicit?</label>
+                <input type="text" name="explicit" onChange={(e) => {
+                  setExplicit(e.target.value)
+                }} value={explicit}/>
+                <label htmlFor="share">Share Link</label>
+                <input type="text" name="share" onChange={(e) => {
+                  setShare(e.target.value)
+                }} value={share}/>
+                <label htmlFor="comments">Comments</label>
+                <input type="text" name="comments" onChange={(e) => {
+                  setComments(e.target.value)
+                }} value={comments}/>
+                <button className="submitRec" onClick={() => submitRec()}>Send Rec
+                </button>
+
+                <img src={image} alt="Poster Image" width="400" height="auto"/>
+              </div>
+          )
+          break;
+      }
     } else if (recType === "Book") {
 
     } else if (recType === "Restaurant") {
@@ -204,6 +314,7 @@ function CreateRec({username}) {
         recData: {
           sentFrom: username,
           recType,
+          musicType,
           title,
           genre: genres,
           overview,
@@ -213,6 +324,12 @@ function CreateRec({username}) {
           numberOfEpisodes,
           comments,
           image,
+          album,
+          artist,
+          numAlbums,
+          numTracks,
+          explicit,
+          share,
         }
       })
       .then((resp) => {
@@ -222,6 +339,67 @@ function CreateRec({username}) {
       })
     }
   }
+
+  const musicButtons = () => {
+    if(recType === "Music") {
+      return (
+          <div>
+            <label htmlFor="artist">Artist</label>
+            <input type="radio" name="musicOption" id="artist" value="artist"
+                   onClick={() => {
+                     setMusicType("artist")
+                     setArtist("")
+                     setImage("")
+                     setTitle("")
+                     setGenres("")
+                     setYear("")
+                     setNumAlbums("")
+                     setNumTracks("")
+                     setExplicit("")
+                     setShare("")
+                     setComments("")
+                     setTempTitle("")
+                   }}/>
+            <label htmlFor="album">Album</label>
+            <input type="radio" name="musicOption" id="album" value="album"
+                   onClick={() => {
+                     setMusicType("album")
+                     setArtist("")
+                     setImage("")
+                     setTitle("")
+                     setGenres("")
+                     setYear("")
+                     setNumAlbums("")
+                     setNumTracks("")
+                     setExplicit("")
+                     setShare("")
+                     setComments("")
+                     setTempTitle("")
+                   }}/>
+            <label htmlFor="track">Track</label>
+            <input type="radio" name="musicOption" id="track" value="track"
+                   onClick={() => {
+                     setMusicType("track")
+                     setArtist("")
+                     setImage("")
+                     setTitle("")
+                     setGenres("")
+                     setYear("")
+                     setNumAlbums("")
+                     setNumTracks("")
+                     setExplicit("")
+                     setShare("")
+                     setComments("")
+                     setTempTitle("")
+                   }}/>
+          </div>
+      )
+    } else {
+      return null;
+    }
+
+  }
+
 
   return (
       <div className="createRec">
@@ -314,6 +492,10 @@ function CreateRec({username}) {
                  setTitlesList([])
                  setTempTitle("")
                }}/>
+
+        {
+          musicButtons()
+        }
 
         {
           makeTitle()
