@@ -40,6 +40,8 @@ function CreateRec({username}) {
   const [explicit, setExplicit] = useState("")
   const [share, setShare] = useState("")
 
+  const [pageCount, setPageCount] = useState("");
+
   const [image, setImage] = useState("");
   const [comments, setComments] = useState("");
 
@@ -68,6 +70,9 @@ function CreateRec({username}) {
                 setTitle(e.target.value)
                 setYear(selectedTitle.year)
                 setImage(selectedTitle.imagePath)
+                if (selectedTitle.overview) {
+                  setOverview(selectedTitle.overview)
+                }
                 getFromTitle(selectedTitle.id)
               }
             }} value={tempTitle}/>
@@ -120,8 +125,12 @@ function CreateRec({username}) {
       setNumTracks(titleInfo.numberOfTracks)
       setExplicit(titleInfo.explicit)
       setShare(titleInfo.share)
+      setPageCount(titleInfo.pageCount)
       if(titleInfo.image) {
         setImage(titleInfo.image)
+      }
+      if (titleInfo.year) {
+        setYear(titleInfo.year)
       }
     })
   }
@@ -294,8 +303,45 @@ function CreateRec({username}) {
           )
           break;
       }
-    } else if (recType === "Book") {
+    } else if (recType === "Books") {
+        return (
+            <div className="booksForm">
+              <label htmlFor="booksAuthor">Author</label>
+              <input type="text" name="booksAuthor" onChange={(e) => {
+                setArtist(e.target.value)
+              }} value={artist}/>
 
+              <label htmlFor="booksGenre">Genre</label>
+              <input type="text" name="booksGenre" onChange={(e) => {
+                setGenres(e.target.value)
+              }} value={genres}/>
+
+              <label htmlFor="booksOverview">Overview</label>
+              <input type="text" name="booksOverview" onChange={(e) => {
+                setOverview(e.target.value)
+              }} value={overview}/>
+
+              <label htmlFor="booksPageCount">Page Count</label>
+              <input type="text" name="booksPageCount" onChange={(e) => {
+                setPageCount(e.target.value)
+              }} value={pageCount}/>
+
+              <label htmlFor="booksYear">Year</label>
+              <input type="text" name="booksYear" onChange={(e) => {
+                setYear(e.target.value)
+              }} value={year}/>
+
+              <label htmlFor="comments">Comments</label>
+              <input type="text" name="comments" onChange={(e) => {
+                setComments(e.target.value)
+              }} value={comments}/>
+
+              <button className="submitRec" onClick={() => submitRec()}>Send Rec
+              </button>
+
+              <img src={image} alt="Poster Image" width="400" height="auto"/>
+            </div>
+        )
     } else if (recType === "Restaurant") {
 
     } else if (recType === "Game") {
@@ -330,6 +376,7 @@ function CreateRec({username}) {
           numTracks,
           explicit,
           share,
+          pageCount,
         }
       })
       .then((resp) => {
@@ -458,9 +505,9 @@ function CreateRec({username}) {
                }}/>
 
         <label htmlFor="Book">Book</label>
-        <input type="radio" name="recOption" id="Book" value="Book"
+        <input type="radio" name="recOption" id="Book" value="Books"
                onClick={() => {
-                 setRecType("Book")
+                 setRecType("Books")
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
