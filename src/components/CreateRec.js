@@ -21,9 +21,12 @@ function CreateRec({username}) {
 
   const [recType, setRecType] = useState("");
 
+  const [state, setState] = useState("")
+
   const [tempTitle, setTempTitle] = useState("");
   const [title, setTitle] = useState("");
   const [titlesList, setTitlesList] = useState([]);
+
 
   const [genres, setGenres] = useState("");
   const [overview, setOverview] = useState("");
@@ -41,6 +44,8 @@ function CreateRec({username}) {
   const [share, setShare] = useState("")
 
   const [pageCount, setPageCount] = useState("");
+
+  const [priceRange, setPriceRange] = useState("");
 
   const [image, setImage] = useState("");
   const [comments, setComments] = useState("");
@@ -87,6 +92,16 @@ function CreateRec({username}) {
                 })
               }
             </datalist>
+            {
+              recType === "Restaurant" ?
+                  <div>
+                    <label htmlFor="stateInput">
+                      State
+                    </label>
+                    <input type="text" onChange={(e) => setState(e.target.value)} name="stateInput"/>
+                  </div>
+                  : null
+            }
 
             <button onClick={() => searchTitle()}>Search</button>
           </div>
@@ -100,6 +115,7 @@ function CreateRec({username}) {
       title: tempTitle,
       recType,
       musicType,
+      state,
     })
     .then((resp) => {
       setTitlesList(resp.data.titlesList)
@@ -126,6 +142,7 @@ function CreateRec({username}) {
       setExplicit(titleInfo.explicit)
       setShare(titleInfo.share)
       setPageCount(titleInfo.pageCount)
+      setPriceRange(titleInfo.priceRange)
       if(titleInfo.image) {
         setImage(titleInfo.image)
       }
@@ -343,9 +360,70 @@ function CreateRec({username}) {
             </div>
         )
     } else if (recType === "Restaurant") {
+      return (
+          <div className="restForm">
+            <label htmlFor="restCuisine">Cuisine</label>
+            <input type="text" name="restCuisine" onChange={(e) => {
+              setGenres(e.target.value)
+            }} value={genres}/>
+
+            <label htmlFor="restAddress">Address</label>
+            <input type="text" name="restAddress" onChange={(e) => {
+              setOverview(e.target.value)
+            }} value={overview}/>
+
+            <label htmlFor="restWebsite">Website</label>
+            <input type="text" name="restWebsite" onChange={(e) => {
+              setShare(e.target.value)
+            }} value={share}/>
+
+            <label htmlFor="comments">Comments</label>
+            <input type="text" name="comments" onChange={(e) => {
+              setComments(e.target.value)
+            }} value={comments}/>
+
+            <button className="submitRec" onClick={() => submitRec()}>Send Rec
+            </button>
+
+          </div>
+      )
+
 
     } else if (recType === "Game") {
+      return (
+          <div className="gamesForm">
 
+            <label htmlFor="gamesGenre">Genre</label>
+            <input type="text" name="gamesGenre" onChange={(e) => {
+              setGenres(e.target.value)
+            }} value={genres}/>
+
+            <label htmlFor="gamesOverview">Overview</label>
+            <input type="text" name="gamesOverview" onChange={(e) => {
+              setOverview(e.target.value)
+            }} value={overview}/>
+
+            <label htmlFor="gamesYear">Year</label>
+            <input type="text" name="gamesYear" onChange={(e) => {
+              setYear(e.target.value)
+            }} value={year}/>
+
+            <label htmlFor="siteLink">Site Link</label>
+            <input type="text" name="siteLink" onChange={(e) => {
+              setShare(e.target.value)
+            }} value={share}/>
+
+            <label htmlFor="comments">Comments</label>
+            <input type="text" name="comments" onChange={(e) => {
+              setComments(e.target.value)
+            }} value={comments}/>
+
+            <button className="submitRec" onClick={() => submitRec()}>Send Rec
+            </button>
+
+            <img src={image} alt="Poster Image" width="400" height="auto"/>
+          </div>
+      )
     } else if (recType === "Other") {
 
     }
