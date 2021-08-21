@@ -18,7 +18,7 @@ function MyRecs({ username }) {
 
   return (
       <div className="myRecs">
-        <h1>My Recs</h1>
+        <h2>My Recs</h2>
         {
           myRecs.map(rec => {
             let recItems = [];

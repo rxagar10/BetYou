@@ -10,4 +10,17 @@ function App() {
   );
 }
 
+const recOptions = {
+  MOVIE: "Movie",
+  TVSHOW: "TVShow",
+  REST: "Restaurant",
+  BOOK: "Book",
+  GAME: "Games",
+  MUSIC: "Music",
+  OTHER: "Other",
+}
+
+export { recOptions }
+
+
 export default App;

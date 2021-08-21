@@ -15,6 +15,7 @@ import CreateRec from "./CreateRec";
 import Friends from "./Friends";
 import MyRecs from "./MyRecs";
 import Home from "./Home";
+import InfoPopup from "./misc-components/InfoPopup";
 
 function Header() {
 
@@ -43,6 +44,20 @@ function Header() {
     localStorage.setItem("friend", fri)
   }
 
+  const checkSignedIn = (comp) => {
+    if (username === "") {
+      return (
+          <div>
+            <Link to="/signup" className="signup">Sign Up</Link>
+            <Link to="/login" className="login">Log In</Link>
+          </div>
+      )
+    } else {
+      return comp;
+    }
+  }
+
+
   return (
       <Router>
         <div className="header">
@@ -58,7 +73,7 @@ function Header() {
             <Menu toggleDrawer={toggleDrawer} getFriend={getFriend} />
           </Drawer>
           <h1 className="RecommenderTitle"><a href={"/"}>Recommender</a></h1>
-          {
+          {/*
             username === undefined || username === ""
                 ?
                 <div className="accountButtons">
@@ -69,36 +84,42 @@ function Header() {
                 <div className="accountButtons" id="userButton" onClick={() => logOut()}>
                   {username}
                 </div>
-          }
+          */}
+
+          <Link to="/create-rec-button" id="create-rec-button" className="menu-item"
+                onClick={() => {
+                  getFriend("")
+                }}
+          >Create Rec</Link>
         </div>
 
         <div className="body-page">
           <Switch>
             <Route exact path="/">
-              <Home username={username} />
+              {checkSignedIn(<Home username={username} />)}
             </Route>
-            <Route exacct path="/signup">
+            <Route exact path="/signup">
               <SignUp/>
             </Route>
-            <Route exacct path="/login">
+            <Route exact path="/login">
               <Login/>
             </Route>
             <Route exact path="/myAccount">
               &nbsp;
-              <MyAccount username={username}/>
+              {checkSignedIn(<MyAccount username={username} logOut={logOut}/>)}
             </Route>
             <Route exact path="/create-rec-button">
               &nbsp;
-              <CreateRec username={username} friend={friend}/>
+              {checkSignedIn(<CreateRec username={username} friend={friend}/>)}
             </Route>
             <Route exact path="/friends">
               &nbsp;
-              <Friends username={username} getFriend={getFriend}/>
+              {checkSignedIn(<Friends username={username} getFriend={getFriend}/>)}
             </Route>
-            <Route exact path="/myRecs">
-              &nbsp;
-              <MyRecs username={username}/>
-            </Route>
+            {/*<Route exact path="/myRecs">*/}
+            {/*  &nbsp;*/}
+            {/*  {checkSignedIn(<MyRecs username={username}/>)}*/}
+            {/*</Route>*/}
           </Switch>
         </div>
       </Router>

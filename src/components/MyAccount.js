@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import config from '../config';
 import "../styles/myAccount.css";
+import MyRecs from "./MyRecs";
 
-function MyAccount({ username }) {
+function MyAccount({ username, logOut }) {
 
   const [email, setEmail] = useState("");
   const [accountBalance, setAccountBalance] = useState(0);
@@ -31,6 +32,10 @@ function MyAccount({ username }) {
           <h4 className="myAccountItemTitle">Email: </h4>
           <span className="myAccountItem">{email}</span>
         </div>
+
+        <button onClick={() => logOut()}>Log Out</button>
+
+        <MyRecs username={username} />
 
       </div>
   )

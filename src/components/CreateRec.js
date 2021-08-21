@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import InfoPopup from "./misc-components/InfoPopup";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import axios from 'axios';
 import config from "../config";
 import {useHistory} from "react-router-dom";
+import {recOptions} from "../App";
 
 function CreateRec({username}) {
 
@@ -19,14 +19,13 @@ function CreateRec({username}) {
   const [myFriends, setMyFriends] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
 
-  const [recType, setRecType] = useState("");
+  const [recType, setRecType] = useState(null);
 
   const [state, setState] = useState("")
 
   const [tempTitle, setTempTitle] = useState("");
   const [title, setTitle] = useState("");
   const [titlesList, setTitlesList] = useState([]);
-
 
   const [genres, setGenres] = useState("");
   const [overview, setOverview] = useState("");
@@ -56,13 +55,24 @@ function CreateRec({username}) {
     axios.post(config.host + config.port + "/createRec", {
       username
     }).then((resp) => {
-      setMyFriends(resp.data.myFriends)
+      setMyFriends(
+          [{firstName: "All Friends", lastName: ""}, ...resp.data.myFriends])
     })
   }, [username])
 
   const makeTitle = () => {
-    if (recType === "") {
+    if (recType === null) {
       return null
+    } else if (recType === recOptions.OTHER) {
+      return (
+          <div>
+            <label htmlFor="title">Title</label>
+            <input list="titles" name="title" onChange={(e) => {
+              setTempTitle(e.target.value)}} value={tempTitle}/>
+
+            <button onClick={() => setTitle(tempTitle)}>Search</button>
+          </div>
+      )
     } else {
       return (
           <div>
@@ -93,12 +103,14 @@ function CreateRec({username}) {
               }
             </datalist>
             {
-              recType === "Restaurant" ?
+              recType === recOptions.REST ?
                   <div>
                     <label htmlFor="stateInput">
                       State
                     </label>
-                    <input type="text" onChange={(e) => setState(e.target.value)} name="stateInput"/>
+                    <input type="text"
+                           onChange={(e) => setState(e.target.value)}
+                           name="stateInput"/>
                   </div>
                   : null
             }
@@ -143,7 +155,7 @@ function CreateRec({username}) {
       setShare(titleInfo.share)
       setPageCount(titleInfo.pageCount)
       setPriceRange(titleInfo.priceRange)
-      if(titleInfo.image) {
+      if (titleInfo.image) {
         setImage(titleInfo.image)
       }
       if (titleInfo.year) {
@@ -153,13 +165,13 @@ function CreateRec({username}) {
   }
 
   const generateRecForm = () => {
-    if (recType === "") {
+    if (recType === null) {
       return <p>Select the type of recommendation</p>
-    } else if(recType === "Music" && musicType === "") {
+    } else if (recType === recOptions.MUSIC && musicType === "") {
       return <p>Select the type of music recommendation</p>
     } else if (title === "") {
       return <p>Search for the title of your recommendation</p>
-    } else if (recType === "Movie") {
+    } else if (recType === recOptions.MOVIE) {
       return (
           <div className="movieForm">
             <label htmlFor="movieGenre">Genre</label>
@@ -193,7 +205,7 @@ function CreateRec({username}) {
             <img src={image} alt="Poster Image" width="400" height="auto"/>
           </div>
       )
-    } else if (recType === "TVShow") {
+    } else if (recType === recOptions.TVSHOW) {
       return (
           <div className="tvShowForm">
 
@@ -229,8 +241,8 @@ function CreateRec({username}) {
 
           </div>
       )
-    } else if (recType === "Music") {
-      switch(musicType) {
+    } else if (recType === recOptions.MUSIC) {
+      switch (musicType) {
         case "artist":
           return (
               <div className="musicForm">
@@ -243,10 +255,12 @@ function CreateRec({username}) {
                   setComments(e.target.value)
                 }} value={comments}/>
 
-                <button className="submitRec" onClick={() => submitRec()}>Send Rec
+                <button className="submitRec" onClick={() => submitRec()}>Send
+                  Rec
                 </button>
 
-                <img src={image} alt="Poster Image" width="400" height="auto"/>
+                <img src={image} alt="Poster Image" width="400"
+                     height="auto"/>
               </div>
           )
           break;
@@ -278,10 +292,12 @@ function CreateRec({username}) {
                   setComments(e.target.value)
                 }} value={comments}/>
 
-                <button className="submitRec" onClick={() => submitRec()}>Send Rec
+                <button className="submitRec" onClick={() => submitRec()}>Send
+                  Rec
                 </button>
 
-                <img src={image} alt="Poster Image" width="400" height="auto"/>
+                <img src={image} alt="Poster Image" width="400"
+                     height="auto"/>
               </div>
           )
           break;
@@ -312,54 +328,56 @@ function CreateRec({username}) {
                 <input type="text" name="comments" onChange={(e) => {
                   setComments(e.target.value)
                 }} value={comments}/>
-                <button className="submitRec" onClick={() => submitRec()}>Send Rec
+                <button className="submitRec" onClick={() => submitRec()}>Send
+                  Rec
                 </button>
 
-                <img src={image} alt="Poster Image" width="400" height="auto"/>
+                <img src={image} alt="Poster Image" width="400"
+                     height="auto"/>
               </div>
           )
           break;
       }
-    } else if (recType === "Books") {
-        return (
-            <div className="booksForm">
-              <label htmlFor="booksAuthor">Author</label>
-              <input type="text" name="booksAuthor" onChange={(e) => {
-                setArtist(e.target.value)
-              }} value={artist}/>
+    } else if (recType === recOptions.BOOK) {
+      return (
+          <div className="booksForm">
+            <label htmlFor="booksAuthor">Author</label>
+            <input type="text" name="booksAuthor" onChange={(e) => {
+              setArtist(e.target.value)
+            }} value={artist}/>
 
-              <label htmlFor="booksGenre">Genre</label>
-              <input type="text" name="booksGenre" onChange={(e) => {
-                setGenres(e.target.value)
-              }} value={genres}/>
+            <label htmlFor="booksGenre">Genre</label>
+            <input type="text" name="booksGenre" onChange={(e) => {
+              setGenres(e.target.value)
+            }} value={genres}/>
 
-              <label htmlFor="booksOverview">Overview</label>
-              <input type="text" name="booksOverview" onChange={(e) => {
-                setOverview(e.target.value)
-              }} value={overview}/>
+            <label htmlFor="booksOverview">Overview</label>
+            <input type="text" name="booksOverview" onChange={(e) => {
+              setOverview(e.target.value)
+            }} value={overview}/>
 
-              <label htmlFor="booksPageCount">Page Count</label>
-              <input type="text" name="booksPageCount" onChange={(e) => {
-                setPageCount(e.target.value)
-              }} value={pageCount}/>
+            <label htmlFor="booksPageCount">Page Count</label>
+            <input type="text" name="booksPageCount" onChange={(e) => {
+              setPageCount(e.target.value)
+            }} value={pageCount}/>
 
-              <label htmlFor="booksYear">Year</label>
-              <input type="text" name="booksYear" onChange={(e) => {
-                setYear(e.target.value)
-              }} value={year}/>
+            <label htmlFor="booksYear">Year</label>
+            <input type="text" name="booksYear" onChange={(e) => {
+              setYear(e.target.value)
+            }} value={year}/>
 
-              <label htmlFor="comments">Comments</label>
-              <input type="text" name="comments" onChange={(e) => {
-                setComments(e.target.value)
-              }} value={comments}/>
+            <label htmlFor="comments">Comments</label>
+            <input type="text" name="comments" onChange={(e) => {
+              setComments(e.target.value)
+            }} value={comments}/>
 
-              <button className="submitRec" onClick={() => submitRec()}>Send Rec
-              </button>
+            <button className="submitRec" onClick={() => submitRec()}>Send Rec
+            </button>
 
-              <img src={image} alt="Poster Image" width="400" height="auto"/>
-            </div>
-        )
-    } else if (recType === "Restaurant") {
+            <img src={image} alt="Poster Image" width="400" height="auto"/>
+          </div>
+      )
+    } else if (recType === recOptions.REST) {
       return (
           <div className="restForm">
             <label htmlFor="restCuisine">Cuisine</label>
@@ -387,9 +405,7 @@ function CreateRec({username}) {
 
           </div>
       )
-
-
-    } else if (recType === "Game") {
+    } else if (recType === recOptions.GAME) {
       return (
           <div className="gamesForm">
 
@@ -424,8 +440,25 @@ function CreateRec({username}) {
             <img src={image} alt="Poster Image" width="400" height="auto"/>
           </div>
       )
-    } else if (recType === "Other") {
+    } else if (recType === recOptions.OTHER) {
+      return (
+          <div className="otherForm">
 
+            <label htmlFor="otherOverview">Overview</label>
+            <input type="text" name="otherOverview" onChange={(e) => {
+              setOverview(e.target.value)
+            }} value={overview}/>
+
+            <label htmlFor="comments">Comments</label>
+            <input type="text" name="comments" onChange={(e) => {
+              setComments(e.target.value)
+            }} value={comments}/>
+
+            <button className="submitRec" onClick={() => submitRec()}>Send Rec
+            </button>
+
+          </div>
+      )
     }
   }
 
@@ -433,6 +466,7 @@ function CreateRec({username}) {
     if (title === "" || friendsList.length === 0) {
       setErrorMessage("Please fill in the required fields")
     } else {
+      console.log(friendsList)
       axios.post(config.host + config.port + "/submitRec", {
         friendsList,
         recData: {
@@ -466,7 +500,7 @@ function CreateRec({username}) {
   }
 
   const musicButtons = () => {
-    if(recType === "Music") {
+    if (recType === recOptions.MUSIC) {
       return (
           <div>
             <label htmlFor="artist">Artist</label>
@@ -525,7 +559,6 @@ function CreateRec({username}) {
 
   }
 
-
   return (
       <div className="createRec">
         <h1 className="page-header">Create Rec</h1>
@@ -544,11 +577,13 @@ function CreateRec({username}) {
             getOptionLabel={(option) => option.firstName + " "
                 + option.lastName}
             onChange={(event, newValue) => {
-              if (friendsList.includes(newValue)) {
-                setFriendsList(friendsList.filter(fri => fri !== newValue))
+              if (newValue.some(val => val.firstName === "All Friends")) {
+                setFriendsList(myFriends.filter(
+                    friend => friend.firstName !== "All Friends"));
               } else {
-                setFriendsList([...friendsList, newValue])
+                setFriendsList(newValue)
               }
+              console.log(friendsList)
 
             }}
             renderInput={(params) =>
@@ -558,7 +593,7 @@ function CreateRec({username}) {
         <label htmlFor="Movie">Movie</label>
         <input type="radio" name="recOption" id="Movie" value="Movie"
                onClick={() => {
-                 setRecType("Movie")
+                 setRecType(recOptions.MOVIE)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
@@ -567,7 +602,7 @@ function CreateRec({username}) {
         <label htmlFor="TVShow">TV Show</label>
         <input type="radio" name="recOption" id="TVShow" value="TVShow"
                onClick={() => {
-                 setRecType("TVShow")
+                 setRecType(recOptions.TVSHOW)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
@@ -576,7 +611,7 @@ function CreateRec({username}) {
         <label htmlFor="Music">Music</label>
         <input type="radio" name="recOption" id="Music" value="Music"
                onClick={() => {
-                 setRecType("Music")
+                 setRecType(recOptions.MUSIC)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
@@ -585,16 +620,17 @@ function CreateRec({username}) {
         <label htmlFor="Book">Book</label>
         <input type="radio" name="recOption" id="Book" value="Books"
                onClick={() => {
-                 setRecType("Books")
+                 setRecType(recOptions.BOOK)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
                }}/>
 
         <label htmlFor="Restaurant">Restaurant</label>
-        <input type="radio" name="recOption" id="Restaurant" value="Restaurant"
+        <input type="radio" name="recOption" id="Restaurant"
+               value="Restaurant"
                onClick={() => {
-                 setRecType("Restaurant")
+                 setRecType(recOptions.REST)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
@@ -603,7 +639,7 @@ function CreateRec({username}) {
         <label htmlFor="Games">Game</label>
         <input type="radio" name="recOption" id="Game" value="Game"
                onClick={() => {
-                 setRecType("Game")
+                 setRecType(recOptions.GAME)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
@@ -612,7 +648,7 @@ function CreateRec({username}) {
         <label htmlFor="Other">Other</label>
         <input type="radio" name="recOption" id="Other" value="Other"
                onClick={() => {
-                 setRecType("Other")
+                 setRecType(recOptions.OTHER)
                  setTitle("")
                  setTitlesList([])
                  setTempTitle("")
