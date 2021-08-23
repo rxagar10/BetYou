@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../styles/header.css";
+import "../styles/header.scss";
 import Drawer from '@material-ui/core/Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import Menu from "./Menu";
@@ -73,7 +73,7 @@ function Header() {
           >
             <Menu toggleDrawer={toggleDrawer} getFriend={getFriend} />
           </Drawer>
-          <h1 className="RecommenderTitle"><a href={"/"}>Recommender</a></h1>
+          <h1 className="RecommenderTitle"><a href={"/"}>Recommendr</a></h1>
           {/*
             username === undefined || username === ""
                 ?
