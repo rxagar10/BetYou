@@ -8,6 +8,11 @@
   --lighter-gray: #f5f5f5;
 }
 
+.page {
+  display: grid;
+  grid-template-rows: 15% 1fr;
+}
+
 .body-page {
   background-color: var(--lighter-gray);
   margin-top: 0;
@@ -21,7 +26,7 @@
   justify-content: space-evenly;
   border-bottom: 2px solid var(--accent-color);
   background-color: var(--light-gray);
-  min-height: 100px;
+  height: 100%;
 }
 
 .menuButton {

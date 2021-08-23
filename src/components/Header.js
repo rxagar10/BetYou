@@ -59,6 +59,7 @@ function Header() {
 
 
   return (
+      <div className="page">
       <Router>
         <div className="header">
           <div className="menuButton" onClick={() => toggleDrawer()}>
@@ -123,7 +124,7 @@ function Header() {
           </Switch>
         </div>
       </Router>
-
+      </div>
   )
 }
 
