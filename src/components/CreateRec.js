@@ -122,7 +122,6 @@ function CreateRec({username}) {
   }
 
   const searchTitle = () => {
-    console.log(tempTitle)
     axios.post(config.host + config.port + "/searchTitle", {
       title: tempTitle,
       recType,
@@ -390,6 +389,11 @@ function CreateRec({username}) {
               setOverview(e.target.value)
             }} value={overview}/>
 
+            <label htmlFor="restPriceRange">Price Range</label>
+            <input type="text" name="restPriceRange" onChange={(e) => {
+              setPriceRange(e.target.value)
+            }} value={priceRange}/>
+
             <label htmlFor="restWebsite">Website</label>
             <input type="text" name="restWebsite" onChange={(e) => {
               setShare(e.target.value)
@@ -466,6 +470,7 @@ function CreateRec({username}) {
     if (title === "" || friendsList.length === 0) {
       setErrorMessage("Please fill in the required fields")
     } else {
+      const numYear = isNaN(Number(year)) ? year : "";
       console.log(friendsList)
       axios.post(config.host + config.port + "/submitRec", {
         friendsList,
@@ -477,7 +482,7 @@ function CreateRec({username}) {
           genre: genres,
           overview,
           runtime,
-          year,
+          numYear,
           numberOfSeasons,
           numberOfEpisodes,
           comments,
@@ -489,6 +494,7 @@ function CreateRec({username}) {
           explicit,
           share,
           pageCount,
+          priceRange
         }
       })
       .then((resp) => {

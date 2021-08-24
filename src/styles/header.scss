@@ -2,17 +2,8 @@
 
 .page {
   display: grid;
-  grid-template-rows: 5% 1fr;
+  grid-template-rows: max-content 1fr;
   overflow-x: hidden;
-
-  @include desktop {
-    grid-template-rows: 7.5% 1fr;
-  }
-
-  @include wideScreen {
-    grid-template-rows: 10% 1fr;
-  }
-
 
 }
 
@@ -20,20 +11,17 @@
   background-color: var(--lighter-gray);
   margin-top: 0;
   min-height: 100%;
+  width: 100vw;
 }
-
-
 
 .header {
   display: grid;
   grid-template-columns: 1.5fr 4fr 1.5fr;
-  width: 100%;
+  width: 100vw;
   justify-content: space-evenly;
   border-bottom: 2px solid var(--accent-color);
   background-color: var(--light-gray);
-  height: calc(100% - 2px)
-
-
+  height: calc(100% - 2px);
 }
 
 .menuButton {
@@ -43,8 +31,28 @@
   align-self: center;
   padding: 4px;
   height: max-content;
-  background-color: var(--light-gray);
-  border-radius: 2vh;
+  background-color: transparent;
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    margin: 0 0 0 1em;
+  }
+
+  @include wideScreen {
+    margin: 0 0 0 1.5em;
+  }
+
 }
 
 .menuButton:hover {
@@ -57,28 +65,58 @@
   height: 2px;
   background-color: black;
   margin: 4px 0;
-  border-radius: 100vh;
+  border-radius: 30px;
+
+  @include tablet {
+    width: 30px;
+    height: 3px;
+    margin: 5px 0;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    width: 40px;
+    height: 4px;
+    margin: 6px 0;
+  }
+
+  @include wideScreen {
+    width: 60px;
+    height: 6px;
+    margin: 8px 0;
+  }
 }
 
 .RecommenderTitle {
+  margin: .5em 0 .5em 0;
   color: var(--black);
   grid-column-start: 2;
   justify-self: center;
   align-self: center;
   font-size: 25px;
 
+  a:hover {
+    text-decoration: none;
+  }
+
   @include tablet {
     font-size: 32px;
   }
 
   @include desktop {
-    font-size: 52px;
+    font-size: 42px;
+    //margin: 0;
   }
 
   @include wideScreen {
-    font-size: 72px;
+    font-size: 80px;
+    //padding: 1em 0 1em 0;
   }
 }
+
 
 #create-rec-button {
   background-color: var(--accent-color);
@@ -88,16 +126,17 @@
   height: max-content;
   align-self: center;
   justify-self: end;
-  font-size: 9px;
-  margin-right: 10%;
+  font-size: 10px;
+  margin: 0 10% 0 0;
   padding: 0.5em .5em .5em .5em;
   color: var(--light-gray);
+
   @include largePhones {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   @include tablet {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   @include laptop {
@@ -105,11 +144,11 @@
   }
 
   @include desktop {
-
+    font-size: 24px;
   }
 
   @include wideScreen {
-
+    font-size: 36px;
   }
 }
 

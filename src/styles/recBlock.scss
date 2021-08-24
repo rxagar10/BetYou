@@ -1,0 +1,57 @@
+@import "../App";
+
+:root {
+  --movie: #732832;
+  --tvshow: #903203;
+  --music: #046294;
+  --book: #5cb2d4;
+  --rest: #329832;
+  --game: #052236;
+  --other: #67532b;
+}
+
+.rec {
+  width: 90%;
+  position: relative;
+  left: 5%;
+  margin: 1em 0 1em 0;
+  height: max-content;
+  border-radius: 15px;
+  background-color: var(--light-gray);
+  box-shadow: 1px 1px 10px 1px;
+
+  &.Movie {
+    border: 2px solid var(--movie);
+  }
+
+  &.TVShow {
+    border: 2px solid var(--tvshow);
+  }
+
+  &.Music {
+    border: 2px solid var(--music);
+  }
+
+  &.Games {
+    border: 2px solid var(--game);
+  }
+
+  &.Restaurant {
+    border: 2px solid var(--rest);
+  }
+
+  &.Book {
+    border: 2px solid var(--book);
+  }
+
+  &.Other {
+    border: 2px solid var(--other);
+  }
+}
+
+.recType {
+  position: absolute;
+  margin: 0;
+  top: 1em;
+  left: 2em;
+}

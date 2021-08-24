@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import "../styles/header.scss";
 import Drawer from '@material-ui/core/Drawer';
 import {makeStyles} from '@material-ui/core/styles';
@@ -57,24 +57,23 @@ function Header() {
     }
   }
 
-
   return (
       <div className="page">
-      <Router>
-        <div className="header">
-          <div className="menuButton" onClick={() => toggleDrawer()}>
-            <div className="menuLines"/>
-            <div className="menuLines"/>
-            <div className="menuLines"/>
-          </div>
-          <Drawer className="menu-drawer" open={drawerOpen}
-                  onClose={() => toggleDrawer()}
-                  classes={{paper: useStyles().paper}}
-          >
-            <Menu toggleDrawer={toggleDrawer} getFriend={getFriend} />
-          </Drawer>
-          <h1 className="RecommenderTitle"><a href={"/"}>Recommendr</a></h1>
-          {/*
+        <Router>
+          <div className="header">
+            <div className="menuButton" onClick={() => toggleDrawer()}>
+              <div className="menuLines"/>
+              <div className="menuLines"/>
+              <div className="menuLines"/>
+            </div>
+            <Drawer className="menu-drawer" open={drawerOpen}
+                    onClose={() => toggleDrawer()}
+                    classes={{paper: useStyles().paper}}
+            >
+              <Menu toggleDrawer={toggleDrawer} getFriend={getFriend}/>
+            </Drawer>
+            <h1 className="RecommenderTitle"><a href={"/"}>Recommendr</a></h1>
+            {/*
             username === undefined || username === ""
                 ?
                 <div className="accountButtons">
@@ -87,46 +86,49 @@ function Header() {
                 </div>
           */}
 
-          <Link to="/create-rec-button" id="create-rec-button" className="menu-item"
-                onClick={() => {
-                  getFriend("")
-                }}
-          >Create Rec</Link>
-        </div>
+            <Link to="/create-rec-button" id="create-rec-button"
+                  className="menu-item"
+                  onClick={() => {
+                    getFriend("")
+                  }}
+            >Create Rec</Link>
+          </div>
 
-        <div className="body-page">
-          <Switch>
-            <Route exact path="/">
-              {checkSignedIn(<Home username={username} />)}
-            </Route>
-            <Route exact path="/signup">
-              <SignUp/>
-            </Route>
-            <Route exact path="/login">
-              <Login/>
-            </Route>
-            <Route exact path="/myAccount">
-              &nbsp;
-              {checkSignedIn(<MyAccount username={username} logOut={logOut}/>)}
-            </Route>
-            <Route exact path="/create-rec-button">
-              &nbsp;
-              {checkSignedIn(<CreateRec username={username} friend={friend}/>)}
-            </Route>
-            <Route exact path="/friends">
-              &nbsp;
-              {checkSignedIn(<Friends username={username} getFriend={getFriend}/>)}
-            </Route>
-            {/*<Route exact path="/myRecs">*/}
-            {/*  &nbsp;*/}
-            {/*  {checkSignedIn(<MyRecs username={username}/>)}*/}
-            {/*</Route>*/}
-          </Switch>
-        </div>
-      </Router>
+          <div className="body-page">
+            <Switch>
+              <Route exact path="/">
+                {checkSignedIn(<Home username={username}/>)}
+              </Route>
+              <Route exact path="/signup">
+                <SignUp/>
+              </Route>
+              <Route exact path="/login">
+                <Login/>
+              </Route>
+              <Route exact path="/myAccount">
+                &nbsp;
+                {checkSignedIn(<MyAccount username={username}
+                                          logOut={logOut}/>)}
+              </Route>
+              <Route exact path="/create-rec-button">
+                &nbsp;
+                {checkSignedIn(<CreateRec username={username}
+                                          friend={friend}/>)}
+              </Route>
+              <Route exact path="/friends">
+                &nbsp;
+                {checkSignedIn(<Friends username={username}
+                                        getFriend={getFriend}/>)}
+              </Route>
+              {/*<Route exact path="/myRecs">*/}
+              {/*  &nbsp;*/}
+              {/*  {checkSignedIn(<MyRecs username={username}/>)}*/}
+              {/*</Route>*/}
+            </Switch>
+          </div>
+        </Router>
       </div>
   )
 }
-
 
 export default Header;
