@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 @mixin largePhones {
   @media only screen and (min-width: 321px) { @content; }
 }

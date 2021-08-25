@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/menu.css";
+import "../styles/menu.scss";
 
 
 function Menu({ toggleDrawer, getFriend}) {

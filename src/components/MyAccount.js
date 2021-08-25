@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import config from '../config';
-import "../styles/myAccount.css";
+import "../styles/myAccount.scss";
 import MyRecs from "./MyRecs";
 
 function MyAccount({ username, logOut }) {
 
   const [email, setEmail] = useState("");
-  const [accountBalance, setAccountBalance] = useState(0);
 
   useEffect(() => {
     axios.post(config.host + config.port + "/myAccount", {
@@ -15,7 +14,6 @@ function MyAccount({ username, logOut }) {
     })
     .then(resp => {
       setEmail(resp.data.email);
-      setAccountBalance(resp.data.accountBalance);
     })
   }, [username])
 
@@ -23,17 +21,17 @@ function MyAccount({ username, logOut }) {
       <div className="myAccount">
         <h1 className="page-header">My Account</h1>
 
-        <div className="myAccountStat">
+        <div className="myAccountDiv">
           <h4 className="myAccountItemTitle">Username: </h4>
           <span className="myAccountItem">{username}</span>
         </div>
 
-        <div className="myAccountStat">
+        <div className="myAccountDiv">
           <h4 className="myAccountItemTitle">Email: </h4>
           <span className="myAccountItem">{email}</span>
         </div>
 
-        <button onClick={() => logOut()}>Log Out</button>
+        <button className="logOutButton" onClick={() => logOut()}>Log Out</button>
 
         <MyRecs username={username} />
 

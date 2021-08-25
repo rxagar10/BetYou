@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "../config";
 import { recOptions } from "../App";
 import "../styles/recBlock.scss";
+import "../styles/home.scss";
 
 function Home({ username }) {
 
@@ -20,7 +21,6 @@ function Home({ username }) {
   }, [username])
 
   const filterRecs = (selected) => {
-    console.log(selected)
     const value = selected.target.value;
     if (value === "") {
       setRecsFiltered(recsFeed);
@@ -31,7 +31,7 @@ function Home({ username }) {
 
   const selectRecType = () => {
     return (
-        <select onChange={(e) => filterRecs(e)}>
+        <select className="selectRec" onChange={(e) => filterRecs(e)}>
           <option value="">All</option>
           <option value={recOptions.MOVIE}>{recOptions.MOVIE}</option>
           <option value={recOptions.TVSHOW}>{recOptions.TVSHOW}</option>
@@ -61,7 +61,7 @@ function Home({ username }) {
                 let recItems = [];
                 for (const key in rec) {
                   if (rec.hasOwnProperty(key)) {
-                    if (key !== "title" && key !== "sentFrom" && key !== "recType" && key !== "id" && key !== "sentTo" && key !== "image") {
+                    if (key !== "title" && key !== "sentFrom" && key !== "share" && key !== "recType" && key !== "overview" && key !== "id" && key !== "sentTo" && key !== "image") {
                       recItems.push({ key: key, val: rec[key] });
                     }
                   }
@@ -69,15 +69,24 @@ function Home({ username }) {
 
                 return (
                     <div className={"rec "  + rec.recType}>
-                      <p>Sent from {rec.sentFrom}</p>
-                      <h3>{rec.title}</h3>
                       <h3 className="recType">{rec.recType}</h3>
-                      <img src={rec.image} alt={rec.image} width="200px" height="auto"/>
+                      <h3 className="recTitle">{rec.title}</h3>
+                      <p className="sentFrom">Sent from {rec.sentFrom}</p>
+                      {
+                        rec.image ? <img src={rec.image} alt={rec.image} width="200px" height="auto"/> : null
+                      }
+                      <p className="overview">{rec.overview}</p>
+
                       {
                         recItems.map(item => {
-                          return <p>{item.key}: {item.val}</p>
+                          return <p className="recItems">{item.key[0].toUpperCase() + item.key.substring(1)}: {item.val}</p>
                         })
                       }
+
+                      {
+                        rec.share ? <p className="recItems">Link: <a href={rec.share}>{rec.share}</a></p> : null
+                      }
+
 
                     </div>
                 )

@@ -1,0 +1,299 @@
+@import "../App";
+
+.friendsList {
+  width: 100%;
+  height: 100%;
+}
+
+.friend {
+  width: 100%;
+  height: 7em;
+  border-top: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--accent-color);
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    height: 8em;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    height: 9em;
+  }
+
+  @include wideScreen {
+    height: 15em;
+  }
+}
+
+.friendName {
+  font-size: 20px;
+
+  @include largePhones {
+  }
+
+  @include tablet {
+    font-size: 22px;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 26px;
+  }
+
+  @include wideScreen {
+    font-size: 42px;
+  }
+}
+
+.recFriendButton {
+  width: 7em;
+  height: 3em;
+  border-radius: 25px;
+  border: none;
+  font-size: 13px;
+  background-color: var(--accent-color);
+  color: var(--light-gray);
+
+  &:hover {
+    background-color: var(--accent-color-opaque);
+  }
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 15px;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include wideScreen {
+    border-radius: 35px;
+    width: 8em;
+    height: 3em;
+    font-size: 32px;
+  }
+}
+
+.pendingFriendRequests, .sendFriendRequest {
+  width: 10em;
+  height: 2em;
+  border-radius: 25px;
+  background-color: var(--accent-color);
+  margin: .5em 1em 1.5em 1em;
+  color: var(--light-gray);
+  font-size: 13px;
+  border: none;
+
+  &:hover {
+    background-color: var(--accent-color-opaque);
+  }
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 15px;
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+
+  @include laptop {
+    margin-left: 3em;
+    margin-right: 3em;
+  }
+
+  @include desktop {
+    border-radius: 35px;
+    font-size: 18px;
+    margin-left: 4em;
+    margin-right: 4em;
+  }
+
+  @include wideScreen {
+    border-radius: 45px;
+    font-size: 36px;
+    margin-left: 5em;
+    margin-right: 5em;
+  }
+}
+
+.friendsModal {
+  position: absolute;
+  background-color: white;
+  width: 80%;
+  height: 60%;
+  left: 10%;
+  top: 20%;
+  border-radius: 10px;
+  text-align: center;
+  border: 3px solid var(--dark-purple);
+}
+
+.pendingFriend {
+  width: 100%;
+  height: 6em;
+  border-top: 1px solid var(--dark-purple);
+  border-bottom: 1px solid var(--dark-purple);
+
+  @include laptop {
+    height: 7em;
+  }
+
+  @include desktop {
+
+  }
+
+  @include wideScreen {
+    height: 13em;
+  }
+}
+
+.friendsModalTitle {
+  font-size: 24px;
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 26px;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 30px;
+  }
+
+  @include wideScreen {
+    font-size: 48px;
+  }
+}
+
+.pendingFriendName {
+  font-size: 16px;
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 18px;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 22px;
+  }
+
+  @include wideScreen {
+    font-size: 38px;
+  }
+}
+
+.handlePendingButton {
+  margin: auto 1em auto 1em;
+  width: 5em;
+  height: 2em;
+  border-radius: 15px;
+  border: none;
+  color: var(--light-gray);
+  font-size: 14px;
+
+  &.accept {
+    background-color: #019101;
+    &:hover {
+      background-color: #21B121;
+    }
+  }
+
+  &.decline {
+    background-color: #a70202;
+    &:hover {
+      background-color: #c72222;
+    }
+  }
+
+  @include laptop {
+    font-size: 15px;
+  }
+
+  @include desktop {
+    font-size: 17px;
+  }
+
+  @include wideScreen {
+    font-size: 32px;
+    width: 5em;
+    height: 2em;
+    border-radius: 25px;
+  }
+
+}
+
+.friendRequestInputBox {
+  width: 90%;
+  margin: auto;
+}
+
+.sendRequestButton {
+  width: 80%;
+  margin: 1em auto;
+  height: 3em;
+  border-radius: 25px;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--light-gray);
+  font-size: 14px;
+
+  &:hover {
+    background-color: var(--accent-color-opaque);
+  }
+
+  @include largePhones {
+    font-size: 16px;
+  }
+
+  @include tablet {
+    font-size: 17px;
+  }
+
+  @include laptop {
+    font-size: 18px;
+  }
+
+  @include desktop {
+    margin-top: 2em;
+    font-size: 20px;
+  }
+
+  @include wideScreen {
+    margin-top: 3em;
+    font-size: 32px;
+    border-radius: 35px;
+  }
+}

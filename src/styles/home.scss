@@ -1,0 +1,22 @@
+@import "../App";
+
+.selectRec {
+  width: 7em;
+  height: 2em;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 15px;
+  color: var(--light-gray);
+  text-indent: 15px;
+  margin: 1em auto 1em auto;
+  font-size: 14px;
+
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include wideScreen {
+    font-size: 28px;
+  }
+}

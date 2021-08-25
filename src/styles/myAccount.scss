@@ -1,0 +1,112 @@
+@import "../App";
+
+.page-header {
+  margin-top: 0;
+  font-size: 24px;
+
+
+  @include desktop {
+    font-size: 28px;
+  }
+
+  @include wideScreen {
+    font-size: 50px;
+  }
+}
+
+.myAccount {
+
+}
+
+.myAccountDiv {
+  margin: 0 auto 1em auto;
+}
+
+.myAccountItemTitle {
+  display: inline;
+  margin: .5em;
+  position: relative;
+  left: 0;
+  //margin-left: 0;
+  font-size: 14px;
+
+  @include largePhones {
+    font-size: 15px;
+  }
+
+  @include tablet {
+    font-size: 16px;
+  }
+
+  @include laptop {
+    font-size: 17px;
+  }
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include wideScreen {
+    font-size: 28px;
+  }
+}
+
+.myAccountItem {
+  font-size: 14px;
+  display: inline;
+  margin-right: 2em;
+
+  @include largePhones {
+    font-size: 15px;
+  }
+
+  @include tablet {
+    font-size: 16px;
+  }
+
+  @include laptop {
+    font-size: 17px;
+  }
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include wideScreen {
+    font-size: 28px;
+  }
+}
+
+.logOutButton {
+  width: 7em;
+  height: 2em;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--dark-purple);
+  color: var(--light-gray);
+  font-size: 14px;
+
+  &:hover {
+    background-color: #04030F;
+  }
+
+  @include largePhones {
+  }
+
+  @include tablet {
+  }
+
+  @include laptop {
+    font-size: 15px;
+  }
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include wideScreen {
+    border-radius: 25px;
+    margin-top: 1em;
+    font-size: 28px;
+  }
+}

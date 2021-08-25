@@ -52,6 +52,127 @@
 .recType {
   position: absolute;
   margin: 0;
-  top: 1em;
-  left: 2em;
+  top: .5em;
+  left: 1em;
+  font-size: 14px;
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 16px;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 20px;
+  }
+
+  @include wideScreen {
+    font-size: 36px;
+  }
+}
+
+.recTitle {
+  position: relative;
+  top: 1.5em;
+  font-size: 18px;
+  margin: 0;
+
+
+  @include tablet {
+    top: 1em;
+    font-size: 20px;
+    margin-bottom: .5em;
+  }
+
+  @include laptop {
+  }
+
+  @include desktop {
+    font-size: 24px;
+  }
+
+  @include wideScreen {
+    font-size: 42px;
+  }
+}
+
+.sentFrom {
+  font-size: 12px;
+  margin: 2.5em 1em 1em 1em;
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 13px;
+    margin-top: 2em;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 15px;
+
+  }
+
+  @include wideScreen {
+    font-size: 26px;
+  }
+}
+
+.overview {
+  font-size: 14px;
+  margin: 1em 1em 1em 1em;
+
+  @include largePhones {
+
+  }
+
+  @include tablet {
+    font-size: 15px;
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include wideScreen {
+    font-size: 32px;
+  }
+}
+
+.recItems {
+  font-size: 13px;
+  margin: 1em 1em 1em 1em;
+
+  @include largePhones {
+  }
+
+  @include tablet {
+    font-size: 14px;
+  }
+
+  @include laptop {
+  }
+
+  @include desktop {
+    font-size: 16px;
+  }
+
+  @include wideScreen {
+    font-size: 30px;
+  }
 }
