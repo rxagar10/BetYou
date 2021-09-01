@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import "../styles/createRec.scss"
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import axios from 'axios';
@@ -65,7 +66,7 @@ function CreateRec({username}) {
       return null
     } else if (recType === recOptions.OTHER) {
       return (
-          <div>
+          <div className="titleDiv">
             <label htmlFor="title">Title</label>
             <input list="titles" name="title" onChange={(e) => {
               setTempTitle(e.target.value)}} value={tempTitle}/>
@@ -75,7 +76,7 @@ function CreateRec({username}) {
       )
     } else {
       return (
-          <div>
+          <div className="titleDiv">
             <label htmlFor="title">Title</label>
             <input list="titles" name="title" onChange={(e) => {
               setTempTitle(e.target.value)
@@ -172,36 +173,42 @@ function CreateRec({username}) {
       return <p>Search for the title of your recommendation</p>
     } else if (recType === recOptions.MOVIE) {
       return (
-          <div className="movieForm">
-            <label htmlFor="movieGenre">Genre</label>
-            <input type="text" name="movieGenre" onChange={(e) => {
+          <div className="recForm movieForm">
+            <label htmlFor="movieGenre" className="formLabel">Genre</label>
+            <input type="text" name="movieGenre" className="formInput" onChange={(e) => {
               setGenres(e.target.value)
             }} value={genres}/>
+            <br/>
 
-            <label htmlFor="movieOverview">Overview</label>
-            <input type="text" name="movieOverview" onChange={(e) => {
+            <label htmlFor="movieOverview" className="formLabel">Overview</label>
+            <textarea name="movieOverview" className="formInput" onChange={(e) => {
               setOverview(e.target.value)
             }} value={overview}/>
+            <br/>
 
-            <label htmlFor="movieRuntime">Runtime</label>
-            <input type="text" name="movieRuntime" onChange={(e) => {
+            <label htmlFor="movieRuntime" className="formLabel">Runtime</label>
+            <input type="text" name="movieRuntime" className="formInput" onChange={(e) => {
               setRuntime(e.target.value)
             }} value={runtime}/>
+            <br/>
 
-            <label htmlFor="movieYear">Year of Release</label>
-            <input type="text" name="movieYear" onChange={(e) => {
+            <label htmlFor="movieYear" className="formLabel">Year of Release</label>
+            <input type="text" name="movieYear" className="formInput" onChange={(e) => {
               setYear(e.target.value)
             }} value={year}/>
+            <br/>
 
-            <label htmlFor="comments">Comments</label>
-            <input type="text" name="comments" onChange={(e) => {
+            <label htmlFor="comments" className="formLabel">Comments</label>
+            <input type="text" name="comments" className="formInput" onChange={(e) => {
               setComments(e.target.value)
             }} value={comments}/>
+            <br/>
 
             <button className="submitRec" onClick={() => submitRec()}>Send Rec
             </button>
+            <br/>
 
-            <img src={image} alt="Poster Image" width="400" height="auto"/>
+            <img src={image} className="recImage" alt="Poster Image" width="400" height="auto"/>
           </div>
       )
     } else if (recType === recOptions.TVSHOW) {
@@ -579,6 +586,10 @@ function CreateRec({username}) {
             multiple
             id="friends"
             className="friendsList"
+            style={{
+              width: "300px",
+              margin: "0 auto"
+            }}
             options={myFriends}
             getOptionLabel={(option) => option.firstName + " "
                 + option.lastName}
@@ -596,81 +607,84 @@ function CreateRec({username}) {
                 <TextField {...params} label="Friends" variant="outlined"/>}
         />
 
-        <label htmlFor="Movie">Movie</label>
-        <input type="radio" name="recOption" id="Movie" value="Movie"
-               onClick={() => {
-                 setRecType(recOptions.MOVIE)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+        <div className="recOptions">
+          <div className="radioButtons">
+          <label htmlFor="Movie" className="radioLabel movie">Movie</label>
+          <input type="radio" name="recOption" id="Movie" value="Movie" className="radioInput movie"
+                 onClick={() => {
+                   setRecType(recOptions.MOVIE)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
 
-        <label htmlFor="TVShow">TV Show</label>
-        <input type="radio" name="recOption" id="TVShow" value="TVShow"
-               onClick={() => {
-                 setRecType(recOptions.TVSHOW)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+          <label htmlFor="TVShow" className="radioLabel tvshow">TV Show</label>
+          <input type="radio" name="recOption" id="TVShow" value="TVShow" className="radioInput tvshow"
+                 onClick={() => {
+                   setRecType(recOptions.TVSHOW)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
 
-        <label htmlFor="Music">Music</label>
-        <input type="radio" name="recOption" id="Music" value="Music"
-               onClick={() => {
-                 setRecType(recOptions.MUSIC)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+          <label htmlFor="Music" className="radioLabel music">Music</label>
+          <input type="radio" name="recOption" id="Music" value="Music" className="radioInput music"
+                 onClick={() => {
+                   setRecType(recOptions.MUSIC)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
 
-        <label htmlFor="Book">Book</label>
-        <input type="radio" name="recOption" id="Book" value="Books"
-               onClick={() => {
-                 setRecType(recOptions.BOOK)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+          <label htmlFor="Book" className="radioLabel book">Book</label>
+          <input type="radio" name="recOption" id="Book" value="Books" className="radioInput books"
+                 onClick={() => {
+                   setRecType(recOptions.BOOK)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
 
-        <label htmlFor="Restaurant">Restaurant</label>
-        <input type="radio" name="recOption" id="Restaurant"
-               value="Restaurant"
-               onClick={() => {
-                 setRecType(recOptions.REST)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+          <label htmlFor="Restaurant" className="radioLabel restaurant">Restaurant</label>
+          <input type="radio" name="recOption" id="Restaurant" className="radioInput restaurant"
+                 value="Restaurant"
+                 onClick={() => {
+                   setRecType(recOptions.REST)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
 
-        <label htmlFor="Games">Game</label>
-        <input type="radio" name="recOption" id="Game" value="Game"
-               onClick={() => {
-                 setRecType(recOptions.GAME)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+          <label htmlFor="Games" className="radioLabel games">Game</label>
+          <input type="radio" name="recOption" id="Game" value="Game" className="radioInput games"
+                 onClick={() => {
+                   setRecType(recOptions.GAME)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
 
-        <label htmlFor="Other">Other</label>
-        <input type="radio" name="recOption" id="Other" value="Other"
-               onClick={() => {
-                 setRecType(recOptions.OTHER)
-                 setTitle("")
-                 setTitlesList([])
-                 setTempTitle("")
-               }}/>
+          <label htmlFor="Other" className="radioLabel other">Other</label>
+          <input type="radio" name="recOption" id="Other" value="Other" className="radioInput other"
+                 onClick={() => {
+                   setRecType(recOptions.OTHER)
+                   setTitle("")
+                   setTitlesList([])
+                   setTempTitle("")
+                 }}/>
+          </div>
+          {
+            musicButtons()
+          }
 
-        {
-          musicButtons()
-        }
+          {
+            makeTitle()
+          }
+          {
+            generateRecForm()
+          }
+        </div>
 
-        {
-          makeTitle()
-        }
-
-        {
-          generateRecForm()
-        }
       </div>
   )
 }
